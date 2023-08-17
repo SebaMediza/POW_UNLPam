@@ -1,0 +1,16 @@
+#mainColor{
+    color: red;
+}
+
+#loren{
+    background-color: aqua;
+    padding: 5pt;
+    font: small-caption;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: xx-large;
+}
+
+#autor{
+    font-style: italic;
+    font-weight: bold;
+}
