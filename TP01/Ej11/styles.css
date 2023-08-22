@@ -1,0 +1,17 @@
+#paddingLeft{
+    padding-left: 5;
+}
+
+#alingRight{
+    text-align: right;
+}
+
+#generalBorder{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#generalBorder th, #generalBorder td{
+    border: 1px solid black;
+    padding: 8px;
+}
