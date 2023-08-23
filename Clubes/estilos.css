@@ -1,0 +1,7 @@
+.image-container {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: center;
+    width: 250px;
+    height: 350px;
+}
