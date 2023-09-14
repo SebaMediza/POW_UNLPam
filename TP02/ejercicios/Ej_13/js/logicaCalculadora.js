@@ -25,26 +25,21 @@ const conversorPorcentaje = /\d{0,2}.%$/gmi;
 
 
 document.addEventListener("DOMContentLoaded",function(){  
-    btn1.addEventListener("click", function(){
-        operationDisplay.value = operationDisplay.value + btn1.innerHTML;
+    const btnNumeros = this.querySelectorAll('.numberBtn');
+    Array.from(btnNumeros).forEach(boton => {
+        boton.addEventListener("click", function(){
+            operationDisplay.value = operationDisplay.value + boton.innerHTML;
+            if(boton.innerHTML == '%'){
+                porcentaje(operationDisplay.innerHTML);
+            }
+        });
     });
-    btn2.addEventListener("click", function(){
-        operationDisplay.value = operationDisplay.value + btn2.innerHTML;
+    const btnOpreaciones = [btnMas, btnMenos, btnMultiplicar, btnDividor, btnMasMenos, btnPorcentaje]
+    Array.from(btnOpreaciones).forEach(operacion =>{
+        operacion.addEventListener("click", function(){
+            operationDisplay.value = operationDisplay.value + operacion.innerHTML;
+        });
     });
-    btn3.addEventListener("click", function(){
-        operationDisplay.value = operationDisplay.value + btn3.innerHTML;
-    });
-    btnMas.addEventListener("click", function(){
-        operationDisplay.value = operationDisplay.value + btnMas.innerHTML;
-    });
-    btnMenos.addEventListener("click", function(){
-        operationDisplay.value = operationDisplay.value + btnMenos.innerHTML;
-    });
-    
-    btnDividor.addEventListener("click", function(){
-        operationDisplay.value = operationDisplay.value + btnDividor.innerHTML;
-    });
-
     btnIgual.addEventListener("click", function(){
         try {
             display.value = eval(operationDisplay.value);
