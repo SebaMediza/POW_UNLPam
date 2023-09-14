@@ -41,4 +41,8 @@ document.addEventListener("DOMContentLoaded",function(){
             display.value = "Error";
         }
     });
+    btnCE.addEventListener("click", function(){
+        display.value = "";
+        operationDisplay.value = "";
+    });
 });
