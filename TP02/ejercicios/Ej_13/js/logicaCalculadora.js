@@ -31,9 +31,21 @@ document.addEventListener("DOMContentLoaded",function(){
     btn3.addEventListener("click", function(){
         operationDisplay.value = operationDisplay.value + btn3.innerHTML;
     });
+    btnMultiplicar.addEventListener("click", function(){
+        operationDisplay.value = operationDisplay.value + btnMultiplicar.innerHTML;
+    });
+    
     btnMas.addEventListener("click", function(){
         operationDisplay.value = operationDisplay.value + btnMas.innerHTML;
     });
+    btnMenos.addEventListener("click", function(){
+        operationDisplay.value = operationDisplay.value + btnMenos.innerHTML;
+    });
+    
+    btnDividor.addEventListener("click", function(){
+        operationDisplay.value = operationDisplay.value + btnDividor.innerHTML;
+    });
+
     btnIgual.addEventListener("click", function(){
         try {
             display.value = eval(operationDisplay.value);
