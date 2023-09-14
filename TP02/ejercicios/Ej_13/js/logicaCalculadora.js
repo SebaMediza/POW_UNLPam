@@ -21,24 +21,31 @@ const btnPorcentaje = document.getElementById("btn%");
 const operationDisplay = document.getElementById("operation-display");
 const display = document.getElementById("main-display");
 
+const conversorPorcentaje = /\d{0,2}.%$/gmi;
+
+
 document.addEventListener("DOMContentLoaded",function(){  
-    btn1.addEventListener("click", function(){
-        operationDisplay.value = operationDisplay.value + btn1.innerHTML;
+    const btnNumeros = this.querySelectorAll('.numberBtn');
+    Array.from(btnNumeros).forEach(boton => {
+        boton.addEventListener("click", function(){
+            operationDisplay.value = operationDisplay.value + boton.innerHTML;
+            if(boton.innerHTML == '%'){
+                porcentaje(operationDisplay.innerHTML);
+            }
+        });
     });
-    btn2.addEventListener("click", function(){
-        operationDisplay.value = operationDisplay.value + btn2.innerHTML;
-    });
-    btn3.addEventListener("click", function(){
-        operationDisplay.value = operationDisplay.value + btn3.innerHTML;
-    });
-    btnMas.addEventListener("click", function(){
-        operationDisplay.value = operationDisplay.value + btnMas.innerHTML;
+    const btnOpreaciones = [btnMas, btnMenos, btnMultiplicar, btnDividor, btnMasMenos, btnPorcentaje]
+    Array.from(btnOpreaciones).forEach(operacion =>{
+        operacion.addEventListener("click", function(){
+            operationDisplay.value = operationDisplay.value + operacion.innerHTML;
+        });
     });
     btnIgual.addEventListener("click", function(){
         try {
             display.value = eval(operationDisplay.value);
         } catch (error) {
-            display.value = "Error";
+            console.log(error);
+            display.value = "error";
         }
     });
     btnCE.addEventListener("click", function(){
@@ -46,3 +53,9 @@ document.addEventListener("DOMContentLoaded",function(){
         operationDisplay.value = "";
     });
 });
+
+function porcentaje(cadena){
+    if(conversorPorcentaje.test(cadena)){
+        console.log("Es porcentaje");
+    }
+}
