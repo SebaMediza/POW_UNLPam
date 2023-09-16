@@ -25,13 +25,12 @@ const conversorPorcentaje = /\d{0,2}.%$/gmi;
 
 
 document.addEventListener("DOMContentLoaded",function(){  
+    let currentInput = "0";
+
     const btnNumeros = this.querySelectorAll('.numberBtn');
     Array.from(btnNumeros).forEach(boton => {
         boton.addEventListener("click", function(){
             operationDisplay.value = operationDisplay.value + boton.innerHTML;
-            if(boton.innerHTML == '%'){
-                porcentaje(operationDisplay.innerHTML);
-            }
         });
     });
     const btnOpreaciones = [btnMas, btnMenos, btnMultiplicar, btnDividor, btnMasMenos, btnPorcentaje]
@@ -52,11 +51,19 @@ document.addEventListener("DOMContentLoaded",function(){
         display.value = "";
         operationDisplay.value = "";
     });
+
+    btnPorcentaje.addEventListener("click", function(){
+        const expression = operationDisplay.value;
+        const lastIndex = expression.lastIndexOf("+") || expression.lastIndexOf("-") || expression.lastIndexOf("*") || expression.lastIndexOf("/");
+        
+        if (lastIndex !== -1) {
+        const lastOperand = expression.substring(lastIndex + 1);
+        const porcentaje = parseFloat(lastOperand) / 100;
+        const newExpression = expression.substring(0, lastIndex + 1) + porcentaje.toString();
+        operationDisplay.value = newExpression;
+        currentInput = porcentaje.toString();
+        }
+    })
+
+
 });
-
-function porcentaje(cadena){
-    if(conversorPorcentaje.test(cadena)){
-        console.log("Es porcentaje");
-    }
-}
-
