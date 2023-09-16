@@ -25,6 +25,7 @@ const conversorPorcentaje = /\d{0,2}.%$/gmi;
 
 
 document.addEventListener("DOMContentLoaded",function(){  
+    
     let currentInput = "0";
 
     const btnNumeros = this.querySelectorAll('.numberBtn');
@@ -33,12 +34,18 @@ document.addEventListener("DOMContentLoaded",function(){
             operationDisplay.value = operationDisplay.value + boton.innerHTML;
         });
     });
+
     const btnOpreaciones = [btnMas, btnMenos, btnMultiplicar, btnDividor, btnMasMenos, btnPorcentaje]
     Array.from(btnOpreaciones).forEach(operacion =>{
         operacion.addEventListener("click", function(){
+            if (display.value != "" && operationDisplay.value !=""){
+                operationDisplay.value = "";
+                operationDisplay.value = display.value;
+            }
             operationDisplay.value = operationDisplay.value + operacion.innerHTML;
         });
     });
+
     btnIgual.addEventListener("click", function(){
         try {
             display.value = eval(operationDisplay.value);
@@ -47,6 +54,7 @@ document.addEventListener("DOMContentLoaded",function(){
             display.value = "error";
         }
     });
+
     btnCE.addEventListener("click", function(){
         display.value = "";
         operationDisplay.value = "";
@@ -55,15 +63,18 @@ document.addEventListener("DOMContentLoaded",function(){
     btnPorcentaje.addEventListener("click", function(){
         const expression = operationDisplay.value;
         const lastIndex = expression.lastIndexOf("+") || expression.lastIndexOf("-") || expression.lastIndexOf("*") || expression.lastIndexOf("/");
-        
         if (lastIndex !== -1) {
-        const lastOperand = expression.substring(lastIndex + 1);
-        const porcentaje = parseFloat(lastOperand) / 100;
-        const newExpression = expression.substring(0, lastIndex + 1) + porcentaje.toString();
-        operationDisplay.value = newExpression;
-        currentInput = porcentaje.toString();
+            const lastOperand = expression.substring(lastIndex + 1);
+            const porcentaje = parseFloat(lastOperand) / 100;
+            const newExpression = expression.substring(0, lastIndex + 1) + porcentaje.toString();
+            operationDisplay.value = newExpression;
+            currentInput = porcentaje.toString();
         }
-    })
+    });
 
-
+    btnC.addEventListener("click", function(){
+        if (display.value != ""){
+            display.value = "";
+        }
+    });
 });
