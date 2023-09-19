@@ -1,0 +1,27 @@
+.form-control{
+    background-color: #e3dfe0;
+}
+
+#btnEnviar{
+    background-color: white;
+    color: black;
+    border: black, solid, 5px;
+}
+
+img{
+    width: 25px;
+    height: 25px;
+}
+
+.formularioDeContacto{
+    text-align: center;
+}
+
+#mainContenedor{
+    background-color: #a7a6b9;
+}
+
+#superContenedor{
+    background-color: rgb(154, 181, 202);
+    border: solid black 2px;
+}

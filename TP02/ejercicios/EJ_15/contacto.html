@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gracias por su Mensaje</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+    <div id="mainContenedor">
+        <br>
+        <h1 class="formularioDeContacto">Lo Contactaremos en brebe</h1>
+        <div class="formularioDeContacto" id="cuenta-regresiva"></div>
+        <br>
+        <div class="formularioDeContacto">
+            <button>
+                <a href="index.html">Volver</a>
+            </button>
+        </div>
+        <br>
+    </div>
+    <script>
+        // Fecha y hora objetivo (1 de diciembre de 2023 a las 00:00)
+        const fechaObjetivo = new Date('2023-10-12T00:00:00');
+
+        // Función para actualizar la cuenta regresiva
+        function actualizarCuentaRegresiva() {
+            const ahora = new Date().getTime();
+            const tiempoRestante = fechaObjetivo - ahora;
+
+            // Calcula los días, horas, minutos y segundos restantes
+            const dias = Math.floor(tiempoRestante / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((tiempoRestante % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((tiempoRestante % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((tiempoRestante % (1000 * 60)) / 1000);
+
+            // Actualiza el contenido en el elemento con id "cuenta-regresiva"
+            const cuentaRegresivaElemento = document.getElementById('cuenta-regresiva');
+            cuentaRegresivaElemento.innerHTML = `Faltan: ${dias} días, ${horas} horas, ${minutos} minutos, ${segundos} segundos`;
+
+            // Si la fecha objetivo ha pasado, muestra un mensaje diferente
+            if (tiempoRestante < 0) {
+                cuentaRegresivaElemento.innerHTML = '¡La fecha objetivo ha pasado!';
+            }
+        }
+
+        // Actualiza la cuenta regresiva cada segundo
+        setInterval(actualizarCuentaRegresiva, 1000);
+
+        // Llama a la función para mostrar la cuenta regresiva inicialmente
+        actualizarCuentaRegresiva();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>
