@@ -1,0 +1,14 @@
+.form-control{
+    background-color: #e3dfe0;
+}
+
+#btnEnviar{
+    background-color: white;
+    color: black;
+    border: black, solid, 5px;
+}
+
+img{
+    width: 25px;
+    height: 25px;
+}
