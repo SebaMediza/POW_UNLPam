@@ -1,0 +1,26 @@
+img{
+    width: 100%;
+}
+.color-texto1{
+    color: white;
+    background-color: rgb(53, 50, 50);
+}
+
+.color-texto2{
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 140, 9);
+}
+
+.color-texto3{
+    color: white;
+    background-color: rgb(255, 0, 0);
+}
+
+
+.info{
+    margin-top: 20%;
+}
+
+.texto{
+    color:hwb(0 0% 0%);
+}
