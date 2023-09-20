@@ -1,0 +1,194 @@
+.content{
+   position: relative;
+}
+.header{
+   display: flex;
+   flex-direction:row;
+   justify-content: end;
+}
+.btCuentaGmail{
+   background: rgb(212, 122, 212);
+   width: 40px;
+   height: 40px;
+   padding: 6px 0px;
+   border-radius: 100%;
+   text-align: center;
+   font-size: 12px;
+   line-height: 1.42857;
+}
+
+.body{
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+}
+
+.lt{
+   float: left;
+}
+
+.ltG{
+   color: #4285F4;
+   font-size: 80px;
+   font-family: 'Arial', sans-serif;
+}
+
+.ltO{
+   color: #EA4335;
+   font-size: 80px;
+   font-family: 'Arial', sans-serif;
+}
+
+.ltO2{
+   color: #FBBC05;
+   font-size: 80px;
+   font-family: 'Arial', 'sans-serif';
+}
+
+.ltG2{
+   color: #4285F4;
+   font-size: 80px;
+   font-family: 'Arial', 'sans-serif';
+}
+
+.ltL{
+   color: #34A853;
+   font-size: 80px;
+   font-family: 'Arial', 'sans-serif';
+}
+
+.ltE{
+   color: #EA4335;
+   font-size: 80px;
+   font-family: 'Arial', 'sans-serif';
+}
+
+.search-box{
+   position: absolute;
+   left: 31%;
+   top: 90%;
+   padding: 10px;
+   
+}
+
+input{
+   outline: none;
+   box-sizing: border-box;
+   height: 35px;
+   width: 500px;
+   padding: 0 20px;
+   border-radius: 50px;
+   font-size: 20px;
+   border-color: gray;
+}
+
+.search-icon{
+   position: absolute;
+   left: 5%;
+   top: 35%;
+}
+
+.mic-icon{
+   position: absolute;
+   left: 82%;
+   top: 35%;
+}
+
+.cam-icon{
+   position: absolute;
+   left: 90%;
+   top: 35%;
+}
+
+.buscar-box{
+   position: absolute;
+   left: 38%;
+   top: 130%;
+   background-color: rgb(231, 229, 229);
+   border-radius: 5px;
+   height: 35px;
+   width: 140px;
+}
+.buscar-google{
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+}
+
+.rand-box{
+   position: absolute;
+   left: 49%;
+   top: 130%;
+   background-color: rgb(231, 229, 229);
+   border-radius: 5px;
+   height: 35px;
+   width: 140px;
+}
+
+.rand-google{
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+}
+
+.idioma-box{
+   position: absolute;
+   left: 38%;
+   top: 160%;
+}
+
+.country-box{
+   background-color: rgb(231, 229, 229);
+   position: absolute;
+   top: 520px;
+   width: 100%;
+}
+
+.info-google{
+   background-color: rgb(231, 229, 229);     /*no aparece el color gris de fondo*/
+   position: absolute;
+   top: -10px;
+   width: 100%;
+}
+
+.sobre-box{
+   position: absolute;
+   top: 580px;
+   left: 10px;
+}
+
+.publi-box{
+   position: absolute;
+   top: 580px;
+   left: 130px;
+}
+
+.buss-box{
+   position: absolute;
+   top: 580px;
+   left: 230px;
+}
+
+.how-box{
+   position: absolute;
+   top: 580px;
+   left: 320px;
+}
+
+.priv-box{
+   position: absolute;
+   top: 580px;
+   left: 1020px;
+}
+
+.condi-box{
+   position: absolute;
+   top: 580px;
+   left: 1130px;
+}
+
+.pref-box{
+   position: absolute;
+   top: 580px;
+   left: 1250px;
+}
