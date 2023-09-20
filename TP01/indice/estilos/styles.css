@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+ul {
+    list-style: square;
+    padding: 0;
+}
+
+
+.imagenes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px; /* Add spacing between images and screen edges */
+}
+
+img {
+    max-width: 50%; /* Set maximum width for each image */
+}

@@ -1,0 +1,70 @@
+.container{
+    display: flex;
+    margin-top: -33px;
+    align-items: center;
+}
+
+.titulo{
+    display: flex;
+    width: 690px;
+    height: 200px;
+    align-items: center;
+}
+
+.title-red{
+    position: absolute;
+    color: rgb(202, 8, 8);
+    text-align: center;
+    font-size: 40px;
+    left: 18%;
+    top: 6%;
+}
+.div-subtitle{
+    position: absolute;
+    width: 630px;
+    left: 10%;
+}
+.subtitle{
+    position: absolute;
+    text-align: center;
+    font-size: 15px;
+}
+
+.programs{
+    position: relative;
+    background-color: black;
+    padding: 35px;
+    width: 230px;
+    
+}
+
+.list{
+    color: white;
+}
+
+.indor{
+    position: absolute;
+    background-color: rgb(221, 193, 31);
+    padding: 35px;
+    width: 230px;
+    height: 246px;
+    top: 412px;
+}
+
+.img3{
+    position: absolute;
+    width: 230px;
+    height: 246px;
+    top: 412px;
+    left: 347px;
+}
+
+.yoga{
+    position: absolute;
+    background-color: rgb(146, 20, 20);
+    padding: 35px;
+    width: 230px;
+    height: 246px;
+    top: 412px;
+    left: 577px;
+}
