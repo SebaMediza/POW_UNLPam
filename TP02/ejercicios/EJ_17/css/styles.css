@@ -6,6 +6,11 @@
    flex-direction:row;
    justify-content: end;
 }
+.appsImg{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
 .btCuentaGmail{
    background: rgb(212, 122, 212);
    width: 40px;
@@ -101,28 +106,28 @@ input{
 }
 
 .buscar-box{
-   position: absolute;
-   left: 38%;
-   top: 130%;
    background-color: rgb(231, 229, 229);
    border-radius: 5px;
    height: 35px;
    width: 140px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }
-.buscar-google{
+.rand-box{
+   background-color: rgb(231, 229, 229);
+   border-radius: 5px;
+   height: 35px;
+   width: 140px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.botonesGoogle{
    display: flex;
    flex-direction: row;
    justify-content: center;
-}
-
-.rand-box{
-   position: absolute;
-   left: 49%;
-   top: 130%;
-   background-color: rgb(231, 229, 229);
-   border-radius: 5px;
-   height: 35px;
-   width: 140px;
+   padding: 25px;
 }
 
 .rand-google{
@@ -132,63 +137,27 @@ input{
 }
 
 .idioma-box{
-   position: absolute;
    left: 38%;
    top: 160%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }
 
 .country-box{
    background-color: rgb(231, 229, 229);
-   position: absolute;
-   top: 520px;
-   width: 100%;
 }
 
 .info-google{
    background-color: rgb(231, 229, 229);     /*no aparece el color gris de fondo*/
-   position: absolute;
-   top: -10px;
-   width: 100%;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
 }
 
-.sobre-box{
-   position: absolute;
-   top: 580px;
-   left: 10px;
+.derecha p{
+   display: inline-block; 
 }
-
-.publi-box{
-   position: absolute;
-   top: 580px;
-   left: 130px;
-}
-
-.buss-box{
-   position: absolute;
-   top: 580px;
-   left: 230px;
-}
-
-.how-box{
-   position: absolute;
-   top: 580px;
-   left: 320px;
-}
-
-.priv-box{
-   position: absolute;
-   top: 580px;
-   left: 1020px;
-}
-
-.condi-box{
-   position: absolute;
-   top: 580px;
-   left: 1130px;
-}
-
-.pref-box{
-   position: absolute;
-   top: 580px;
-   left: 1250px;
+.izquierda p{
+   display: inline-block;
 }
