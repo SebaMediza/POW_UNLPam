@@ -36,34 +36,35 @@ User.create = (newUser, result) => {
 
 
 
-User.inicioSesion = async (user, result) => {
-  const nombre = user.nombre;
-  const password = user.password;
+User.inicioSesion = async (user, res) => {
+    const nombre = user.nombre;
+    const password = user.password;
 
-  await sql.query(`SELECT * FROM clientes WHERE nombre = '${nombre}'`, async (err, resSql) => {
-      if (err) throw (err)
-          if (resSql.length == 0) {
-              res.status(404).send("usuario no encontrado");
-          }
-          else {
+    await sql.query(`SELECT * FROM clientes WHERE nombre = '${nombre}'`, async (err, resSql) => {
+        if (err) throw (err)
+        if (resSql.length == 0) {
+            res.status(404).send("usuario no encontrado");
+        }
+        else {
             const usuario = resSql[0];
-            console.log(password);
-            console.log(usuario.password);
-              if(await bcrypt.compare(password, usuario.password)){
-                console.log("inicio de seson correcto");
-                result.status(200).json(usuario);
-              }else{
+           
+            if (await bcrypt.compare(password, usuario.password)) {
+                console.log("inicio de sesion correcto");
+                //res(<error>, <data>)
+                res(null, 200);
+
+                //deberia ir a la pagina de inicio.
+            } else {
                 console.log("inicio incorrecto de sesion");
-               // result.status(500).json(usuario);
-                  return;
+                res(500, null);
+            }
+            
+        }//end of User exists i.e. results.length==0
+        
+    }) //end of connection.query()
+    
 
-              }
 
 
-          }//end of User exists i.e. results.length==0
-      }) //end of connection.query()
-
-      
-
-}; 
-module.exports= User;
+};
+module.exports = User;

@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.post("/registro", controllers.create);
 
 //ruta para chequear datos de inicio de sesion
-app.get("/inicioSesion", controllers.inicioSesion);
+app.post("/inicioSesion", controllers.inicioSesion);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 80;

@@ -30,6 +30,7 @@ exports.inicioSesion = (req, res) =>{
         password: req.body.password
     });
     User.inicioSesion(user,(err, data) => {
+       
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
@@ -40,7 +41,7 @@ exports.inicioSesion = (req, res) =>{
                     message: "error al buscar nombre"
                 });
             }
-        } else res.send(data);
+        } else res.sendStatus(data);
     });
 
 }
