@@ -1,4 +1,4 @@
-const User = require("../model/user-model.js");
+const User = require("../model/user.model.js");
 
 exports.create = (req, res) => {
     // Validate request
@@ -25,12 +25,14 @@ exports.create = (req, res) => {
 
 exports.inicioSesion = (req, res) =>{
     const user = new User({
-        nombre : req.body.nombre,
+        //nombre : req.body.nombre,
         email: req.body.email,
         password: req.body.password
     });
     User.inicioSesion(user,(err, data) => {
-       
+        if(data === 200){
+            res.redirect('/home')
+        }
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
