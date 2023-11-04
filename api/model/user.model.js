@@ -1,55 +1,79 @@
 const bcrypt = require('bcryptjs');
 const sql = require("../db/db.js");
+//para generar token
+const jwt = require("jsonwebtoken");
+const { KEY_APP } = process.env;
+
 
 // constructor
 const User = function (user) {
-    this.nombre = user.nombre;
-    this.email = user.email;
-    this.password = user.password;
+  this.nombre = user.nombre;
+  this.mail = user.mail;
+  this.password = user.password;
 };
 
-User.create = (newUser, result) => {
-    // Encriptar la contraseña
-    bcrypt.hash(newUser.password, 10, (err, hash) => {
-        if (err) {
-            console.log("Error al encriptar la contraseña: ", err);
-            result(err, null);
-            return;
-        }
-        // Reemplazar la contraseña original con el hash en newUser
-        newUser.password = hash;
-        sql.query("INSERT INTO clientes SET ?", newUser, (err, res) => {
+
+User.login = async (user, res) => {
+  const password = user.password;
+
+  console.log(user);
+  await sql.query(`SELECT * FROM clientes WHERE nombre = '${user.nombre}'`, async (err, resSql) => {
+    if (err) throw (err)
+    if (resSql.length == 0) {
+      res.status(404).send("usuario no encontrado");
+    }
+    else {
+      const usuario = resSql[0];
+      if (await bcrypt.compare(password, usuario.password)) {
+        //genera el token para el usuario con el id y el nombre
+        const token = jwt.sign({ user_name: usuario.nombre }, 'llave');
+        usuario.token = token;
+        //actualiza el usuario con el token correcto
+        sql.query(
+          "UPDATE clientes SET token = ? WHERE nombre = ?",
+          [usuario.token, usuario.nombre],
+          (err, res) => {
             if (err) {
-                console.log("Error al crear el cliente: ", err);
-                result(err, null);
-                return;
+              console.log("error: ", err);
             }
-            console.log("Cliente creado: ", { id: res.insertId, ...newUser });
-            result(null, { id: res.insertId, ...newUser });
-        });
-    });
+            if (res.affectedRows == 0) {
+              result({ kind: "not_found" }, null);
+            }
+          }
+        );
+        res(null, 200);
+      }
+
+
+    }//end of User exists i.e. results.length==0
+  }) //end of connection.query()
 };
 
-User.inicioSesion = async (user, res) => {
-    const email = user.email;
-    const password = user.password;
-    await sql.query(`SELECT * FROM clientes WHERE email = '${email}'`, async (err, resSql) => {
-        if (err) throw (err)
-        if (resSql.length == 0) {
-            res.status(404).send("usuario no encontrado");
-        }
-        else {
-            const usuario = resSql[0];
-            if (await bcrypt.compare(password, usuario.password)) {
-                console.log("inicio de sesion correcto");
-                //res(<error>, <data>)
-                res(null, 200);
-                //deberia ir a la pagina de inicio.
-            } else {
-                console.log("inicio incorrecto de sesion");
-                res(500, null);
-            }
-        }//end of User exists i.e. results.length==0
-    }) //end of connection.query()
+User.registro = (user, result) => {
+  //console.log(user);
+
+  bcrypt.hash(user.password, 10, (err, mihash) => {
+    if (err) {
+      console.log("Error al encriptar la contraseña: ", err);
+      result(err, null);
+      return;
+    }
+
+    // Reemplazar la contraseña original con el hash en newUser
+    user.password = mihash;
+
+    sql.query("INSERT INTO clientes SET ?", user, (err, res) => {
+      if (err) {
+        console.log("Error al crear el nuevo usario: ", err);
+        result(err, null);
+        return;
+      }
+      console.log("Usuario creado: ", { id: res.insertId, ...user });
+      result(null, { id: res.insertId, ...user });
+    });
+
+  });
+
 };
+
 module.exports = User;

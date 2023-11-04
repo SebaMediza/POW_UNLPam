@@ -18,10 +18,10 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/',main.auth);
 
 //ruta para crear torta, al ser una por get y otra por post son diferentes
-app.post("/registro", user.create);
+app.post("/registro", user.registro);
 
 //ruta para chequear datos de inicio de sesion
-app.post("/inicioSesion", user.inicioSesion);
+app.post("/login", user.login);
 
 app.get('/home', main.home);
 
@@ -42,7 +42,7 @@ app.delete("/series/:id", serie.delete);
 app.delete("/series", serie.deleteAll);
 
 // set port, listen for requests
-const PORT = process.env.PORT || 7071;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
