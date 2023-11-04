@@ -1,6 +1,6 @@
-const User = require("../model/user-model.js");
+const User = require("../model/usuario-model.js");
 
-exports.create = (req, res) => {
+exports.registro = (req, res) => {
     // Validate request
     if (!req.body) {
         res.status(400).send({
@@ -8,29 +8,28 @@ exports.create = (req, res) => {
         });
     }
     const user = new User({
-        nombre : req.body.nombre,
-        email: req.body.email,
-        password: req.body.password
+      nombre : req.body.nombre,
+      mail : req.body.mail,
+      password : req.body.password
     });
-    User.create(user, (err, data) => {
+    console.log(user);
+    User.registro(user, (err, data) => {
         if (err)
             res.status(500).send({
-                message:
-                    err.message || "error al crear la torta."
+                message: err.message || "error al crear el nuevo usuario."
             });
         else res.send(data);
     });
 
 };
 
-exports.inicioSesion = (req, res) =>{
+exports.login = (req, res) =>{
     const user = new User({
         nombre : req.body.nombre,
-        email: req.body.email,
+        mail: req.body.mail,
         password: req.body.password
     });
-    User.inicioSesion(user,(err, data) => {
-       
+    User.login(user,(err, data) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
@@ -41,7 +40,9 @@ exports.inicioSesion = (req, res) =>{
                     message: "error al buscar nombre"
                 });
             }
-        } else res.sendStatus(data);
+        } else {
+            res.sendStatus(data);
+        }
     });
 
 }
