@@ -1,12 +1,12 @@
 import React from "react";
 import { Button, Text, View } from "react-native";
 
-function HomeScreen () {
+function PastEventsScreen () {
     return (
         <View>
-            <Text>Home Screen</Text>
+            <Text>PastEventsScreen</Text>
         </View>
     );
 }
 
-export default HomeScreen;
+export default PastEventsScreen;
