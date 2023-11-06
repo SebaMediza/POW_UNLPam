@@ -9,7 +9,7 @@ exports.registro = (req, res) => {
     }
     const user = new User({
       nombre : req.body.nombre,
-      mail : req.body.mail,
+      email : req.body.email,
       password : req.body.password
     });
     console.log(user);
@@ -26,8 +26,9 @@ exports.registro = (req, res) => {
 exports.login = (req, res) =>{
     const user = new User({
         nombre : req.body.nombre,
-        mail: req.body.mail,
-        password: req.body.password 
+        email: req.body.email,
+        password: req.body.password,
+        //token: req.body.token 
     });
     User.login(user,(err, data) => {
         if (err) {

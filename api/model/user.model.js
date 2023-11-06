@@ -8,15 +8,16 @@ const { KEY_APP } = process.env;
 // constructor
 const User = function (user) {
   this.nombre = user.nombre;
-  this.mail = user.mail;
+  this.email = user.email;
   this.password = user.password;
+  this.token = user.token;
 };
 
 
 User.login = async (user, res) => {
   const password = user.password;
-
-  console.log(user);
+  const userToken = user.token;
+  console.log(userToken);
   await sql.query(`SELECT * FROM clientes WHERE nombre = '${user.nombre}'`, async (err, resSql) => {
     if (err) throw (err)
     if (resSql.length == 0) {
@@ -28,19 +29,24 @@ User.login = async (user, res) => {
         //genera el token para el usuario con el id y el nombre
         const token = jwt.sign({ user_name: usuario.nombre }, 'llave');
         usuario.token = token;
+        console.log(usuario.token);
+        
         //actualiza el usuario con el token correcto
-        sql.query(
-          "UPDATE clientes SET token = ? WHERE nombre = ?",
-          [usuario.token, usuario.nombre],
-          (err, res) => {
-            if (err) {
-              console.log("error: ", err);
+        if(user.token != usuario.token){
+          sql.query(
+            "UPDATE clientes SET token = ? WHERE nombre = ?",
+            [usuario.token, usuario.nombre],
+            (err, res) => {
+              if (err) {
+                console.log("error: ", err);
+              }
+              if (res.affectedRows == 0) {
+                result({ kind: "not_found" }, null);
+              }
             }
-            if (res.affectedRows == 0) {
-              result({ kind: "not_found" }, null);
-            }
-          }
-        );
+          );
+        }
+        console.log("Usuario logeado: ", { id: res.insertId, ...user });
         res(null, 200);
       }
 
@@ -58,7 +64,9 @@ User.registro = (user, result) => {
       result(err, null);
       return;
     }
-
+    const token = jwt.sign({ user_name: user.nombre }, 'llave');
+    user.token = token;
+    console.log(user.token);
     // Reemplazar la contraseña original con el hash en newUser
     user.password = mihash;
 
