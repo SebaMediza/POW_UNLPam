@@ -1,4 +1,5 @@
 const User = require("../model/usuario-model.js");
+const Tarjeta = require("../model/tarjeta-model.js");
 
 exports.registro = (req, res) => {
     // Validate request
@@ -10,17 +11,24 @@ exports.registro = (req, res) => {
     const user = new User({
       nombre : req.body.nombre,
       mail : req.body.mail,
-      password : req.body.password
+      password : req.body.password,
+      tipoPlan : req.body.tipoPlan
     });
-    console.log(user);
-    User.registro(user, (err, data) => {
+    
+    const tarjeta = new Tarjeta({
+        nroTarjeta : req.body.nroTarjeta,
+        vencimiento :  req.body.vencimiento,
+        ccv : req.body.ccv,
+        idUsuario: '',   //cambiar por la consulta a la bd para saber cual es el usaurio que la carga
+    });
+    User.registro(user, tarjeta, (err, data) => {
         if (err)
             res.status(500).send({
                 message: err.message || "error al crear el nuevo usuario."
             });
         else res.send(data);
     });
-
+    
 };
 
 exports.login = (req, res) =>{
