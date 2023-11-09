@@ -8,7 +8,8 @@ import {
     StatusBar,
     Button,
   } from 'react-native';
-import Navigation from "../components/Navigation";
+
+  import Navigation from "../components/Navigation";
 
   const getItem = (_data, index) => ({
     id: Math.random().toString(12).substring(0),
