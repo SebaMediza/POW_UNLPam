@@ -26,7 +26,7 @@ function HomeScreen () {
                     </View>
                     )}
                 />
-                <Button title="More Next Events"></Button>                    
+                <Button title="More Next Events" color={"black"}></Button>                    
             </View>
             <View style={styles.section}>
                 <Text style={styles.sectionTitle}>Past Events</Text>
@@ -41,7 +41,7 @@ function HomeScreen () {
                     </View>
                     )}
                 />
-                <Button title="More Past Events" buttonStyle={{backgroundColor: "red"}}></Button>
+                <Button title="More Past Events" color={"black"} ></Button>
             </View>
         </View>
   );
