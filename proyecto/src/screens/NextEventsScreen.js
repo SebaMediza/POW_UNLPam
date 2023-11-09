@@ -33,6 +33,7 @@ import {
                 keyExtractor={item => item.id}
                 getItemCount={getItemCount}
                 getItem={getItem}
+                showsVerticalScrollIndicator={false}
             />
             <Button
                 onPress={() => {
