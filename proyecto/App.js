@@ -14,20 +14,20 @@ function App () {
           <Tab.Navigator
               screenOptions={({ route }) => ({
                   tabBarIcon: ({ focused, color, size }) => {
-                  let iconName;
-      
-                  if (route.name === 'Home') {
-                      iconName = focused
-                      ? 'ios-home'
-                      : 'ios-home-outline';
-                  } else if (route.name === 'Next Events') {
-                      iconName = focused ? 'ios-calendar' : 'ios-calendar-outline';
-                  }else if (route.name === 'Past Events') {
-                    iconName = focused ? 'ios-folder' : 'ios-folder-outline';
-                  }
-      
-                  // You can return any component that you like here!
-                  return <Ionicons name={iconName} size={size} color={color} />;
+                    let iconName;
+        
+                    if (route.name === 'Home') {
+                        iconName = focused
+                        ? 'ios-home'
+                        : 'ios-home-outline';
+                    } else if (route.name === 'Next Events') {
+                        iconName = focused ? 'ios-calendar' : 'ios-calendar-outline';
+                    }else if (route.name === 'Past Events') {
+                      iconName = focused ? 'ios-folder' : 'ios-folder-outline';
+                    }
+        
+                    // You can return any component that you like here!
+                    return <Ionicons name={iconName} size={size} color={color} />;
                   },
                   tabBarActiveTintColor: 'yellow',
                   tabBarInactiveTintColor: 'white',
