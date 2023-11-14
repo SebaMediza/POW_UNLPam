@@ -6,6 +6,10 @@ const serie = require("./controllers/serie.controller.js");
 const main = require('./controllers/main.controller.js')
 const app = express();
 const path = require('path');
+const bcrypt = require("bcryptjs");
+
+const usuarios = require('./controllers/usuario-controller')
+const auth = require("./middleware/auth");
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')))
@@ -41,8 +45,28 @@ app.post("/series/:id", serie.update);
 app.delete("/series/:id", serie.delete);
 app.delete("/series", serie.deleteAll);
 
+app.use(express.urlencoded({ extended: true }));
+
+// simple route
+app.get("/", (req, res) => {
+    res.json({ message: "Hola soy la api de node" });
+});
+
+//ruta para ir al registrase
+app.post("/registro", usuarios.registro);
+
+//ruta para iniciar sesion
+app.post("/login", usuarios.login);
+
+//ruta que se puede acceder si estas loguado
+app.get("/solologueado", auth,(req, res) => {
+
+  res.json({ message: "Hola soy la api de node" });
+});
+
+
 // set port, listen for requests
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 7071;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
