@@ -1,12 +1,12 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "description": "Proyecto de Pow",
-  "main": "route.js",
+  "description": "api para bananaTv",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Blas Gebruers",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
