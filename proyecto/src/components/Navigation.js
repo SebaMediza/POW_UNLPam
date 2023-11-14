@@ -1,6 +1,6 @@
 import React from "react";
 import { NavigationContainer } from '@react-navigation/native';
-//import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreen from "../screens/HomeScreen";
@@ -10,8 +10,18 @@ import EventScreen from "../screens/EventScreen";
 import NextEventsScreen from "../screens/NextEventsScreen";
 import PastEventsScreen from "../screens/PastEventsScreen";
 
-//const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const DetailScreen = () => {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen name="Detail Event" component={EventScreen} />
+        {/* Otras pantallas de Detail Event si las tienes */}
+      </Stack.Navigator>
+    );
+  };
+
 
 function Navigation () {
     return (
@@ -51,7 +61,6 @@ function Navigation () {
                 <Tab.Screen name="Home" component={HomeScreen} />
                 <Tab.Screen name="Next Events" component={NextEventsScreen} />
                 <Tab.Screen name="Past Events" component={PastEventsScreen} />
-                <Tab.Screen name="Detail Event" component={EventScreen} />
             </Tab.Navigator>
         </NavigationContainer>
     );

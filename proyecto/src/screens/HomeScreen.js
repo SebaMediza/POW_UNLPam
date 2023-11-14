@@ -32,7 +32,7 @@ function HomeScreen ({navigation}) {
                       </View>                     
                     )}
                 />
-                <Button title="More Next Events" color={"black"} onPress={() => navigation.navigate('Next Events')}></Button>                    
+                <Button title="More Next Events" color={"black"} onPress={() => navigation.navigate('DetailScreen')}></Button>                    
             </View>
             <View style={styles.section}>
                 <Text style={styles.sectionTitle}>Past Events</Text>
@@ -44,7 +44,7 @@ function HomeScreen ({navigation}) {
                     renderItem={({ item }) => (
                       <View style={{ margin: 10, padding: 50, backgroundColor: 'lightgray' }}>
                           <Text>{item.text}</Text>
-                          <Button title="Details" onPress={()=> navigation.navigate("Detail Event")}></Button>
+                          <Button title="Details" onPress={()=> navigation.navigate("DetailScreen")}></Button>
                       </View>
                     )}
                 />
