@@ -1,15 +1,19 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreen from './src/screens/HomeScreen';
 import NextEventsScreen from './src/screens/NextEventsScreen';
 import PastEventsScreen from './src/screens/PastEventsScreen';
+import Navigation from './src/components/Navigation';
 
 const Tab = createBottomTabNavigator();
 
 function App () {
-    return (
+  return (
+    <Navigation></Navigation>
+  );
+    /*return (
       <NavigationContainer>
           <Tab.Navigator
               screenOptions={({ route }) => ({
@@ -38,10 +42,9 @@ function App () {
             <Tab.Screen name="Home" component={HomeScreen} />
             <Tab.Screen name="Next Events" component={NextEventsScreen} />
             <Tab.Screen name="Past Events" component={PastEventsScreen} />
-          </Tab.Navigator>
+            </Tab.Navigator>
       </NavigationContainer>
-  
-  );
+    );*/
 }
 
 export default App;

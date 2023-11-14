@@ -9,7 +9,7 @@ import {
     Button,
   } from 'react-native';
 
-  import Navigation from "../components/Navigation";
+  //import Navigation from "../components/Navigation";
 
   const getItem = (_data, index) => ({
     id: Math.random().toString(12).substring(0),
@@ -24,7 +24,7 @@ import {
     </View>
   );
 
-  function NextEventsScreen () {
+  function NextEventsScreen ({navigation}) {
     return (
         <SafeAreaView style={styles.container}>
             <VirtualizedList
@@ -37,7 +37,7 @@ import {
             />
             <Button
                 onPress={() => {
-                    Navigation.navigate("HomeScreen");
+                    navigation.navigate("Home");
                 }}
                 title="More"
                 //color="#841584"
