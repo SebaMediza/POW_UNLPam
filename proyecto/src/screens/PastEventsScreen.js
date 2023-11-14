@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
       marginTop: StatusBar.currentHeight,
     },
     item: {
-      backgroundColor: '#f9c2ff',
+      backgroundColor: 'grey',
       height: 150,
       justifyContent: 'center',
       marginVertical: 8,
