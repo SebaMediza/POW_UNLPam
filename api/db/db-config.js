@@ -1,7 +1,7 @@
 //se usa para que desde otro lado se pueda encontrar
 module.exports = {
     HOST: "localhost",
-    USER: "root",
-    PASSWORD: "",
+    USER: "user",
+    PASSWORD: "user",
     DB: "bananatv"
 };
