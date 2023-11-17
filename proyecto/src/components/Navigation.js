@@ -4,8 +4,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreen from "../screens/HomeScreen";
-//import LoginScreen from "../screens/LoginScreen";
-//import RegisterScreen from "../screens/RegisterScreen";
 import EventScreen from "../screens/EventScreen";
 import NextEventsScreen from "../screens/NextEventsScreen";
 import PastEventsScreen from "../screens/PastEventsScreen";
