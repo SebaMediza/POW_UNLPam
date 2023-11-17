@@ -74,7 +74,7 @@ function NextEventsScreen({navigation}){
 
 export default NextEventsScreen;
 
-
+//Version Vieja similar a PastEventsScreen
 //import {SafeAreaView, VirtualizedList, View,StyleSheet, Text, StatusBar, Button,} from 'react-native';
 /*
 const getItem = (_data, index) => ({
