@@ -3,7 +3,7 @@ import '../public/assets/css/auth.css'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-const page = ({isLogged}) => {
+const page = ({}) => {
   const router = useRouter()
 
   const [nombre, setNombre] = useState('');
