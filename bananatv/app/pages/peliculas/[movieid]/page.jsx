@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from "react"
-import '../../../public/assets/css/Movie.css'
+import '../../../../public/assets/css/Movie.css'
 import Info from "@/components/Info"
 
 const page = ({ params }) => {

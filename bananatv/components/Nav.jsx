@@ -20,13 +20,13 @@ const Nav = () => {
                             </button>
                         </li>
                         <li className="nav-item">
-                            <a className="btn btn-warning" aria-current="page" href="/peliculas">Peliculas</a>
+                            <a className="btn btn-warning" aria-current="page" href="/pages/peliculas">Peliculas</a>
                         </li>
                         <li className="nav-item">
-                            <a className="btn btn-warning" aria-current="page" href="/series">Series</a>
+                            <a className="btn btn-warning" aria-current="page" href="/pages/series">Series</a>
                         </li>
                         <li className="nav-item">
-                            <a className="btn btn-warning" aria-current="page" href="livetv">En Vivo</a>
+                            <a className="btn btn-warning" aria-current="page" href="/pageslivetv">En Vivo</a>
                         </li>
                     </ul>
                 </div>

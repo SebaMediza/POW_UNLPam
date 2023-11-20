@@ -1,8 +1,7 @@
 'use client'
 import { useState } from "react"
 
-import '../../public/assets/css/Card.css'
-import Card from "@/components/Card"
+import '../../../public/assets/css/Card.css'
 import CardSerie from "@/components/CardSerie"
 
 const page = () => {

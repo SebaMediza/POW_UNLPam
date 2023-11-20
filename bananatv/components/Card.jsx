@@ -5,7 +5,7 @@ const Card = ({producciones}) => {
         <div className="cardContainer">
             {producciones.map((item) => (
                 <div className="card" key={item.idMovie}>
-                    <Link href={`/peliculas/${item.idMovie}`}>
+                    <Link href={`/pages/peliculas/${item.idMovie}`}>
                         <img src={item.banner} className="card-img-top" alt="..." />
                     </Link>
                     <div className="card-body">
