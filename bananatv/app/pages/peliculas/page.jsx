@@ -1,10 +1,10 @@
 'use client'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import '../../../public/assets/css/Card.css'
 import Card from "@/components/Card"
 
-const page = () => {
+const page = ({isLogged}) => {
     const api = 'http://localhost:7071/peliculas'
     const getPelis = async () => {
         const res = await fetch(api);
@@ -14,7 +14,7 @@ const page = () => {
         setLoading(false);
     }
 
-    useState(() => {
+    useEffect(() => {
         getPelis();
     }, []);
 

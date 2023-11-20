@@ -17,36 +17,37 @@ const User = function (user) {
 User.login = async (user, res) => {
   const password = user.password;
 
-    await sql.query(`SELECT * FROM usuarios WHERE nombre = '${user.nombre}'`, async (err, resSql) => {
-        if (err) throw (err)
-            if (resSql.length == 0) {
-                res.status(404).send("usuario no encontrado");
+    sql.query(`SELECT * FROM usuarios WHERE nombre = '${user.nombre}'`, async (err, resSql) => {
+    if (err) throw (err);
+    if (resSql.length == 0) {
+      res.status(404).send("usuario no encontrado");
+    }
+    else {
+      const usuario = resSql[0];
+      if (await bcrypt.compare(password, usuario.password)) {
+        //genera el token para el usuario con el id y el nombre
+        const token = jwt.sign({ user_name: usuario.nombre }, KEY_APP);
+        usuario.token = token;
+        //actualiza el usuario con el token correcto
+        sql.query(
+          "UPDATE usuarios SET token = ? WHERE nombre = ?",
+          [usuario.token, usuario.nombre],
+          (err, res) => {
+            if (err) {
+              console.log("error: ", err);
             }
-            else {
-                const usuario = resSql[0];
-                if(await bcrypt.compare(password, usuario.password)){
-                    //genera el token para el usuario con el id y el nombre
-                    const token = jwt.sign({user_name: usuario.nombre},KEY_APP);
-                    usuario.token = token;
-                    //actualiza el usuario con el token correcto
-                    sql.query(
-                        "UPDATE usuarios SET token = ? WHERE nombre = ?",
-                        [usuario.token, usuario.nombre],
-                        (err, res) => {
-                          if (err) {
-                            console.log("error: ", err);
-                          }
-                          if (res.affectedRows == 0) {
-                            result({ kind: "not_found" }, null);
-                          }
-                        }
-                    );
-                    res(null, 200);
-                }
+            if (res.affectedRows == 0) {
+              result({ kind: "not_found" }, null);
+            }
+          }
+        );
+        res(null, 200);
+      }
 
 
-            }//end of User exists i.e. results.length==0
-        }) //end of connection.query()
+    } //end of User exists i.e. results.length==0
+  }) //end of connection.query()
+ //end of connection.query()
 }; 
 
 User.registro = (user, tarjeta, result) => {

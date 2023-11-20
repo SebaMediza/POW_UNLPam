@@ -25,9 +25,8 @@ const page = ({ params }) => {
 
     return (
         <>
-            {loading ? (<p>Cargando...</p>) : (
-                <Info produccion={data} />
-            )}
+            {loading ? 
+                (<p>Cargando...</p>) : (<Info produccion={data} />)}
         </>
     )
 }

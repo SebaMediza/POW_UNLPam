@@ -6,7 +6,7 @@ const Nav = () => {
     return (
         <nav className="navbar navbar-expand-lg">
             <div className="container-fluid">
-                <a className="navbar-brand" href="/">
+                <a className="navbar-brand" href="/pages">
                     <img src="/img/logoSinFondo.png" alt="" />
                 </a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,7 +26,7 @@ const Nav = () => {
                             <a className="btn btn-warning" aria-current="page" href="/pages/series">Series</a>
                         </li>
                         <li className="nav-item">
-                            <a className="btn btn-warning" aria-current="page" href="/pageslivetv">En Vivo</a>
+                            <a className="btn btn-warning" aria-current="page" href="/pages/livetv">En Vivo</a>
                         </li>
                     </ul>
                 </div>

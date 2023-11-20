@@ -1,5 +1,5 @@
 'use client'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import '../../../public/assets/css/Card.css'
 import CardSerie from "@/components/CardSerie"
@@ -14,7 +14,7 @@ const page = () => {
         setLoading(false);
     }
 
-    useState(() => {
+    useEffect(() => {
         getSeries();
     }, []);
 
