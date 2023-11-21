@@ -45,7 +45,9 @@ exports.login = (req, res, callback) =>{
           // Puedes acceder al token y al código de estado
           const { token, status } = data;
           if (status === 200) {
-            callback(null, { status: 200, message: "Inicio de sesión exitoso", token: token });            
+            //callback(null, { status: 200, message: "Inicio de sesión exitoso", token: token });   
+                   
+            res.send({ token: token, status: 200, message: "Inicio de sesión exitoso" });
           } else {
             console.log("Mensaje de error:", data.message);
           }

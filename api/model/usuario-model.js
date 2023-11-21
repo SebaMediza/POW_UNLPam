@@ -44,6 +44,7 @@ User.login = async (user, callback) => {
             callback(err, null);
           } else {
             if (res.affectedRows === 0) {
+              
               callback({ kind: "not_found" }, null);
             } else {
               callback(null, { status: 200, message: "Inicio de sesión exitoso", token: usuario.token });

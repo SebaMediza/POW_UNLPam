@@ -51,7 +51,7 @@ app.use((req, res, next) => {
   res.header('x-access-token', global.myAppToken);
   const miCampo = req.headers['x-access-token'];
 
-  console.log("el campo del header queda: " + miCampo);
+  
   // Continúa con el siguiente middleware o manejador de ruta
   next();
 });
