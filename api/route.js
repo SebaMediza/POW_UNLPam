@@ -66,6 +66,16 @@ app.get("/solologueado", auth,(req, res) => {
 });
 
 
+//ruta para cerrar sesion. Antes de poder cerrar sesion chequea si tiene token es decir si esta logeado.
+app.get("/cerrarSesion",auth,(req, res)=>{
+  if (res && res.statusCode === 200) {
+    usuarios.cerrarSesion(req.body.idUser, res);
+  }else{
+    console.log("error respondio mal"+  res.status);
+  }
+});
+
+
 // set port, listen for requests
 const PORT = process.env.PORT || 7071;
 app.listen(PORT, () => {

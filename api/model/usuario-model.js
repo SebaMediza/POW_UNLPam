@@ -7,6 +7,7 @@ const {KEY_APP} = process.env;
 
 // constructor
 const User = function (user) {
+  this.idUser = user.idUser;
   this.nombre = user.nombre;
   this.mail = user.mail;
   this.password = user.password;
@@ -14,41 +15,50 @@ const User = function (user) {
 };
 
 
-User.login = async (user, res) => {
+User.login = async (user, callback) => {
   const password = user.password;
 
-    sql.query(`SELECT * FROM usuarios WHERE nombre = '${user.nombre}'`, async (err, resSql) => {
-    if (err) throw (err);
-    if (resSql.length == 0) {
-      res.status(404).send("usuario no encontrado");
+
+  await sql.query(`SELECT * FROM usuarios WHERE nombre = '${user.nombre}'`, async (err, resSql) => {
+    if (err) {
+      callback(err, null);
+      return;
     }
-    else {
-      const usuario = resSql[0];
-      if (await bcrypt.compare(password, usuario.password)) {
-        //genera el token para el usuario con el id y el nombre
-        const token = jwt.sign({ user_name: usuario.nombre }, KEY_APP);
-        usuario.token = token;
-        //actualiza el usuario con el token correcto
-        sql.query(
-          "UPDATE usuarios SET token = ? WHERE nombre = ?",
-          [usuario.token, usuario.nombre],
-          (err, res) => {
-            if (err) {
-              console.log("error: ", err);
-            }
-            if (res.affectedRows == 0) {
-              result({ kind: "not_found" }, null);
+
+    if (resSql.length === 0) {
+      callback(null, { status: 404, message: "Usuario no encontrado", token: null });
+      return;
+    }
+
+    const usuario = resSql[0];
+    if (await bcrypt.compare(password, usuario.password)) {
+      const token = jwt.sign({ user_name: usuario.nombre }, KEY_APP);
+      usuario.token = token;
+
+      // Actualiza el usuario con el token correcto
+      sql.query(
+        "UPDATE usuarios SET token = ? WHERE nombre = ?",
+        [usuario.token, usuario.nombre],
+        (err, res) => {
+          if (err) {
+            console.log("Error:", err);
+            callback(err, null);
+          } else {
+            if (res.affectedRows === 0) {
+              
+              callback({ kind: "not_found" }, null);
+            } else {
+              callback(null, { status: 200, message: "Inicio de sesión exitoso", token: usuario.token });
             }
           }
-        );
-        res(null, 200);
-      }
+        }
+      );
+    } else {
+      callback(null, { status: 401, message: "Contraseña incorrecta", token: null });
+    }
+  });
+};
 
-
-    } //end of User exists i.e. results.length==0
-  }) //end of connection.query()
- //end of connection.query()
-}; 
 
 User.registro = (user, tarjeta, result) => {
   
@@ -97,5 +107,23 @@ User.registro = (user, tarjeta, result) => {
   });
   
 };
+
+
+User.cerrarSesion = (idUser, res) => {
+  sql.query(`UPDATE usuarios SET token ='' WHERE idUser= '${idUser}'`, (err, result) => {
+    if(err){
+      console.log("hubo un error al intentar cerrar sesion");
+      res(err, null);
+      return;
+    }
+  //  console.log("Sesion cerrada correctamente: " +res);
+    res(null, 200);
+
+  });
+ 
+}
+
+
+
 
 module.exports = User;
