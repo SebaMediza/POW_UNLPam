@@ -3,7 +3,7 @@ import '../public/assets/css/auth.css'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-const page = ({}) => {
+const page = () => {
   const router = useRouter()
 
   const [nombre, setNombre] = useState('');
@@ -26,13 +26,15 @@ const page = ({}) => {
       body: JSON.stringify({ nombre, password })
     })
 
+    const data = await res.json();
+
     if (res.status === 200) {
       setIsLoading(false);
       router.refresh();
       router.push('/pages');
     }
   }
-
+  
   const handleRegister = async (e) => {
     const api = 'http://localhost:7071/registro';
     e.preventDefault();
@@ -42,8 +44,9 @@ const page = ({}) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nombre, mail, password, tipoPlan, nroTarjeta, cardholderName, vencimiento, ccv })
     })
-
+    
     if (res.status === 200) {
+      setUserToken(data.token)
       setIsLoading(false);
       router.refresh();
       router.push('/pages');

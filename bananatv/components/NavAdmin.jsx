@@ -1,8 +1,26 @@
+'use client';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../public/assets/css/Nav.css';
 
 
 const Nav = () => {
+    const handleCerrarCerrarSesion = async (e) => {
+        const api = 'http://localhost:7071/cerrarSesion'
+        e.preventDefault();
+        const res = await fetch(api, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                nombre
+            })
+        })
+        if (res.status === 200) {
+            console.log('Sesion cerrada')
+        }
+    }
+
     return (
         <nav className="navbar navbar-expand-lg">
             <div className="container-fluid">
@@ -48,7 +66,9 @@ const Nav = () => {
                                 </button>
                             </div>
                             <div className="modal-body">
-                                <p>Contenido de la Ventana Modal.</p>
+                                <form onSubmit={handleCerrarCerrarSesion}>
+                                    <button type='submit'>Cerrar Sesion</button>
+                                </form>
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-secondary" data-dismiss="modal">Cerrar</button>
