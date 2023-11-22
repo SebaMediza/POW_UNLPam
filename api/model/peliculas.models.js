@@ -5,10 +5,12 @@ const Pelicula = function (pelicula) {
     this.descripcion = pelicula.descripcion,
     this.fecha_lanzamiento = pelicula.fecha_lanzamiento,
     this.duracion = pelicula.duracion,
+    this.productor = pelicula.productor,
     this.director = pelicula.director,
     this.genero = pelicula.genero,
     this.urlPelicula = pelicula.urlPelicula,
-    this.image = pelicula.image
+    this.banner = pelicula.banner,
+    this.imagen = pelicula.image
 };
 
 Pelicula.create = (newPelicula, result) => {

@@ -1,16 +1,23 @@
+// Initialize express router
 const express = require("express");
 const cors = require("cors");
+require("dotenv").config();
+const {API_PORT} = process.env;
 const user = require('./controllers/user.controller.js');
+const bcrypt = require("bcryptjs");
+
+// Require user routes
 const pelicula = require("./controllers/pelicula.controller.js");
 const serie = require("./controllers/serie.controller.js");
 const main = require('./controllers/main.controller.js')
-const app = express();
-const path = require('path');
-const bcrypt = require("bcryptjs");
-
 const usuarios = require('./controllers/usuario-controller')
 const auth = require("./middleware/auth");
 
+
+
+// Initialize express router
+const app = express();
+const path = require('path');
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')))
 // parse requests of content-type - application/json
@@ -20,14 +27,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/',main.auth);
-
-//ruta para crear torta, al ser una por get y otra por post son diferentes
-app.post("/registro", user.registro);
-
-//ruta para chequear datos de inicio de sesion
-app.post("/login", user.login);
-
 app.get('/home', main.home);
+
 
 //Todo lo referido a peliculas
 app.post("/peliculas", pelicula.create);
