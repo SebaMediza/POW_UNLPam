@@ -108,7 +108,7 @@ User.registro = (user, tarjeta, result) => {
 
 
 User.cerrarSesion = (idUser, res) => {
-  sql.query(`UPDATE usuarios SET token ='' WHERE idUser= '${idUser}'`, (err, result) => {
+  sql.query(`UPDATE usuarios SET token ='' WHERE nombre= '${idUser}'`, (err, result) => {
     if(err){
       console.log("hubo un error al intentar cerrar sesion");
       res(err, null);
