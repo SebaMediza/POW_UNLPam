@@ -10,13 +10,13 @@ const User = function (user) {
   this.nombre = user.nombre;
   this.mail = user.mail;
   this.password = user.password;
+  this.tipoPlan = user.tipoPlan;
 };
 
 
 User.login = async (user, res) => {
   const password = user.password;
 
-console.log(user);
     await sql.query(`SELECT * FROM usuarios WHERE nombre = '${user.nombre}'`, async (err, resSql) => {
         if (err) throw (err)
             if (resSql.length == 0) {
@@ -49,9 +49,8 @@ console.log(user);
         }) //end of connection.query()
 }; 
 
-User.registro = (user, result) => {
-  //console.log(user);
-
+User.registro = (user, tarjeta, result) => {
+  
   bcrypt.hash(user.password, 10, (err, mihash)=>{
     if (err) {
         console.log("Error al encriptar la contraseña: ", err);
@@ -69,8 +68,30 @@ User.registro = (user, result) => {
             return;
         }
         console.log("Usuario creado: ", { id: res.insertId, ...user });
-        result(null, { id: res.insertId, ...user });
     });
+
+  
+    sql.query(`SELECT idUser FROM usuarios WHERE nombre = '${user.nombre}'`, (err, res) => {
+      if (err) {
+          console.log("error: ", err);
+          result(err, null);
+          return;
+      }
+       if (res.length) {
+          tarjeta.idUsuario = res[0].idUser;      
+          sql.query("INSERT INTO tarjeta SET ?", tarjeta, (err, res) => {
+            console.log(tarjeta.idUsuario);
+            if (err) {
+              console.log("Error al cargar la tarjeta: ", err);
+              result(err, null);
+              return;
+            }
+            console.log("Tarjeta añadida: ", { id: res.insertId, ...tarjeta });
+            result(null, { id: res.insertId, ...tarjeta });
+          }); 
+        }
+    });
+        
 
   });
   
