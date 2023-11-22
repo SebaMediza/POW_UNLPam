@@ -1,6 +1,5 @@
 const User = require("../model/usuario-model.js");
 const Tarjeta = require("../model/tarjeta-model.js");
-global.myAppToken = null
 
 exports.registro = (req, res) => {
     // Validate request
@@ -32,40 +31,26 @@ exports.registro = (req, res) => {
     
 };
 
-exports.login = (req, res, callback) =>{
+exports.login = (req, res) =>{
     const user = new User({
         nombre : req.body.nombre,
         mail: req.body.mail,
         password: req.body.password
     });
-    User.login(user, (err, data) => {
+    User.login(user,(err, data) => {
         if (err) {
-          console.error("Error:", err);
-        } else {
-          // Puedes acceder al token y al código de estado
-          const { token, status } = data;
-          if (status === 200) {
-            //callback(null, { status: 200, message: "Inicio de sesión exitoso", token: token });   
-                   
-            res.send({ token: token, status: 200, message: "Inicio de sesión exitoso" });
-          } else {
-            console.log("Mensaje de error:", data.message);
-          }
-        }
-      });
-
-}
-
-exports.cerrarSesion = (idUser, res) =>{
-    User.cerrarSesion(idUser, (err, data)=>{
-        if(err){
-            console.log("error de cierre de sesion");
-        }else{
-            if(data){
-                res.sendStatus(data);    
-            }else{
-             console.log("res es undefined: "+ data);
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `usuario no encontrado`
+                });
+            } else {
+                res.status(500).send({
+                    message: "error al buscar nombre"
+                });
             }
+        } else {
+            res.sendStatus(data);
         }
     });
+
 }

@@ -110,3 +110,13 @@ exports.deleteAll = (req, res) => {
         } else res.send({ "status": 200, "data": data });
     });
 };
+
+exports.searchByGender = (req, res) =>{
+    Pelicula.searchByGender(req.body.genero,(err, data) =>{
+        if(err){
+            console.log("ha ocurrido un error: " + err);
+        }else{
+            res.send(data);
+        }
+    })
+}
