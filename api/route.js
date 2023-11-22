@@ -65,6 +65,7 @@ app.get("/solologueado", auth,(req, res) => {
   res.json({ message: "Hola soy la api de node" });
 });
 
+
 //ruta para cerrar sesion. Antes de poder cerrar sesion chequea si tiene token es decir si esta logeado.
 app.get("/cerrarSesion",auth,(req, res)=>{
   if (res && res.statusCode === 200) {
@@ -73,8 +74,6 @@ app.get("/cerrarSesion",auth,(req, res)=>{
     console.log("error respondio mal"+  res.status);
   }
 });
-
-
 
 
 // set port, listen for requests
