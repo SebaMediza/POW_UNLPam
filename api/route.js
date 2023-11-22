@@ -77,7 +77,7 @@ app.get("/cerrarSesion",auth,(req, res)=>{
 
 
 // set port, listen for requests
-const PORT = process.env.PORT || 7071;
+const PORT = process.env.PORT || API_PORT;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });

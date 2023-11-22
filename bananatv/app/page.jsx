@@ -29,12 +29,15 @@ const page = () => {
     const data = await res.json();
 
     if (res.status === 200) {
+      //console.log(data.token);
+      const expirationDate = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 365);
+      document.cookie = `token=${data.token}; expires=${expirationDate.toUTCString()}; path=/`;
       setIsLoading(false);
       router.refresh();
       router.push('/pages');
     }
   }
-  
+
   const handleRegister = async (e) => {
     const api = 'http://localhost:7071/registro';
     e.preventDefault();
@@ -44,7 +47,7 @@ const page = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nombre, mail, password, tipoPlan, nroTarjeta, cardholderName, vencimiento, ccv })
     })
-    
+
     if (res.status === 200) {
       setUserToken(data.token)
       setIsLoading(false);

@@ -3,8 +3,10 @@ import { useEffect, useState } from "react"
 
 import '../../../public/assets/css/Card.css'
 import Card from "@/components/Card"
+import { useRouter } from "next/navigation"
 
-const page = ({}) => {
+const page = () => {
+    const router = useRouter()
     const api = 'http://localhost:7071/peliculas'
     const getPelis = async () => {
         const res = await fetch(api);
@@ -16,7 +18,13 @@ const page = ({}) => {
     }
 
     useEffect(() => {
-        getPelis();
+        const token = document.cookie.split('; ').find(row => row.startsWith('token=')).split('=')[1];
+        console.log(token);
+        if(token.length == 0){
+            router.push('/');
+        } else {
+            getPelis();
+        }
     }, []);
 
     const [data, setData] = useState([]); //useState([]) es el estado inicial, que es un array vacio
