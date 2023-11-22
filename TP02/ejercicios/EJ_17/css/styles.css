@@ -1,0 +1,163 @@
+.content{
+   position: relative;
+}
+.header{
+   display: flex;
+   flex-direction:row;
+   justify-content: end;
+}
+.appsImg{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.btCuentaGmail{
+   background: rgb(212, 122, 212);
+   width: 40px;
+   height: 40px;
+   padding: 6px 0px;
+   border-radius: 100%;
+   text-align: center;
+   font-size: 12px;
+   line-height: 1.42857;
+}
+
+.body{
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+}
+
+.lt{
+   float: left;
+}
+
+.ltG{
+   color: #4285F4;
+   font-size: 80px;
+   font-family: 'Arial', sans-serif;
+}
+
+.ltO{
+   color: #EA4335;
+   font-size: 80px;
+   font-family: 'Arial', sans-serif;
+}
+
+.ltO2{
+   color: #FBBC05;
+   font-size: 80px;
+   font-family: 'Arial', 'sans-serif';
+}
+
+.ltG2{
+   color: #4285F4;
+   font-size: 80px;
+   font-family: 'Arial', 'sans-serif';
+}
+
+.ltL{
+   color: #34A853;
+   font-size: 80px;
+   font-family: 'Arial', 'sans-serif';
+}
+
+.ltE{
+   color: #EA4335;
+   font-size: 80px;
+   font-family: 'Arial', 'sans-serif';
+}
+
+.search-box{
+   position: absolute;
+   left: 31%;
+   top: 90%;
+   padding: 10px;
+   
+}
+
+input{
+   outline: none;
+   box-sizing: border-box;
+   height: 35px;
+   width: 500px;
+   padding: 0 20px;
+   border-radius: 50px;
+   font-size: 20px;
+   border-color: gray;
+}
+
+.search-icon{
+   position: absolute;
+   left: 5%;
+   top: 35%;
+}
+
+.mic-icon{
+   position: absolute;
+   left: 82%;
+   top: 35%;
+}
+
+.cam-icon{
+   position: absolute;
+   left: 90%;
+   top: 35%;
+}
+
+.buscar-box{
+   background-color: rgb(231, 229, 229);
+   border-radius: 5px;
+   height: 35px;
+   width: 140px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.rand-box{
+   background-color: rgb(231, 229, 229);
+   border-radius: 5px;
+   height: 35px;
+   width: 140px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.botonesGoogle{
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   padding: 25px;
+}
+
+.rand-google{
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+}
+
+.idioma-box{
+   left: 38%;
+   top: 160%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.country-box{
+   background-color: rgb(231, 229, 229);
+}
+
+.info-google{
+   background-color: rgb(231, 229, 229);     /*no aparece el color gris de fondo*/
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+}
+
+.derecha p{
+   display: inline-block; 
+}
+.izquierda p{
+   display: inline-block;
+}

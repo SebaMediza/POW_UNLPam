@@ -18,6 +18,7 @@ const User = function (user) {
 User.login = async (user, callback) => {
   const password = user.password;
 
+
   await sql.query(`SELECT * FROM usuarios WHERE nombre = '${user.nombre}'`, async (err, resSql) => {
     if (err) {
       callback(err, null);
@@ -57,6 +58,7 @@ User.login = async (user, callback) => {
     }
   });
 };
+
 
 User.registro = (user, tarjeta, result) => {
   
