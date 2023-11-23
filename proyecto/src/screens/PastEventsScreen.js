@@ -13,8 +13,6 @@ const eventosData = [
   { id: 7, title: 'Evento 7', description: 'Descripción del evento 7', date: '2024-04-02'}
 ];
 
-
-
 function PastEventsScreen({navigation}){
   // Ordenar los eventos del más viejo al más nuevo por año, mes y día
   const eventosOrdenados = eventosData.sort((a, b) => {
