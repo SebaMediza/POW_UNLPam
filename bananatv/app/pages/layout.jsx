@@ -5,10 +5,9 @@ import '../../public/assets/css/Global.css'
 
 export default function PagesLayout({ children }) {
   return (
-    <section>
-      
-      <NavAdmin />
-      {children}
-    </section>
+      <section>
+        <NavAdmin />
+        {children}
+      </section>
   )
 }

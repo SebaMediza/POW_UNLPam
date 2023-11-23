@@ -29,13 +29,19 @@ exports.create = (req, res) => {
 };
 
 exports.list = (req, res) => {
+    console.log("llega al listado");
     Pelicula.getAll((err, data) => {
         if (err) {
             res.status(500).send({
                 message:
                     err.message || "error al encontrar las peliculas"
             })
-        } else res.send({ "status": 200, "data": data });
+        }  
+        try {
+            res.send(data);
+        } catch (error) {
+            console.log("error: " + error);
+        }
     });
 };
 

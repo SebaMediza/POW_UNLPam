@@ -114,7 +114,7 @@ User.cerrarSesion = (idUser, res) => {
       res(err, null);
       return;
     }
-  //  console.log("Sesion cerrada correctamente: " +res);
+    console.log("Sesion cerrada correctamente: " +res);
     res(null, 200);
 
   });

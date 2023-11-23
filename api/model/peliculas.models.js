@@ -42,6 +42,7 @@ Pelicula.findById = (id, result) => {
 };
 
 Pelicula.getAll = (result) => {
+    console.log("llega al modelo");
     let query = "SELECT * FROM pelicula";
     sql.query(query, (err, res) => {
         if (err) {
@@ -49,7 +50,6 @@ Pelicula.getAll = (result) => {
             result(null, err);
             return;
         }
-        console.log("peliculas: ", res);
         result(null, res);
     });
 };

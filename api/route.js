@@ -68,9 +68,9 @@ app.post("/peliculas", auth,(req, res)=>{
 
 //ruta para listar las peliculas
 app.get("/peliculas", auth,(req, res)=>{
+  console.log("llega al get peliculas");
   if (res && res.statusCode === 200) {
     pelicula.list(req, res) 
-    
   }else{
     console.log("error no es posible ir a la home dado que no ha iniciado sesion: "+  res.status);
   }
@@ -200,7 +200,7 @@ app.get("/cerrarSesion",auth,(req, res)=>{
 
 
 // set port, listen for requests
-const PORT = process.env.PORT || 7071;
+const PORT = process.env.PORT || API_PORT;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
