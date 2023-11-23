@@ -14,6 +14,7 @@ const serie = require("./controllers/serie.controller.js");
 const main = require('./controllers/main.controller.js')
 const usuarios = require('./controllers/usuario-controller')
 const auth = require("./middleware/auth");
+const favorite = require("./controllers/favorite.controller.js")
 
 
 // Initialize express router
@@ -68,15 +69,15 @@ app.post("/peliculas", auth,(req, res)=>{
 
 //ruta para listar las peliculas
 app.get("/peliculas", auth,(req, res)=>{
-  console.log("llega al get peliculas");
   if (res && res.statusCode === 200) {
     pelicula.list(req, res) 
+    
   }else{
     console.log("error no es posible ir a la home dado que no ha iniciado sesion: "+  res.status);
   }
 });
 //ruta para buscar una pelicula por id
-app.get("/peliculas/:id", auth,(req, res)=>{
+app.get("/peliculas/:id",(req, res)=>{
   if (res && res.statusCode === 200) {
     pelicula.getId(req, res) 
   }else{
@@ -169,6 +170,30 @@ app.get("/serie/genero", auth,(req, res)=>{
   }
 });
 
+//todo lo referido a favoritos
+app.post("/favorite",auth,(req, res)=>{
+  if (res && res.statusCode === 200) {
+    favorite.create(req, res) 
+  }else{
+    console.log("error no es posible ir a la home dado que no ha iniciado sesion: "+  res.status);
+  }
+});
+
+app.get("/favorite",auth,(req, res)=>{
+  if (res && res.statusCode === 200) {
+    favorite.list(req, res) 
+  }else{
+    console.log("error no es posible ir a la home dado que no ha iniciado sesion: "+  res.status);
+  }
+});
+
+app.delete("/favorite/:id",auth,(req, res)=>{
+  if (res && res.statusCode === 200) {
+    favorite.delete(req, res) 
+  }else{
+    console.log("error no es posible ir a la home dado que no ha iniciado sesion: "+  res.status);
+  }
+});
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -189,6 +214,7 @@ app.get("/solologueado", auth,(req, res) => {
 });
 
 
+
 //ruta para cerrar sesion. Antes de poder cerrar sesion chequea si tiene token es decir si esta logeado.
 app.get("/cerrarSesion",auth,(req, res)=>{
   if (res && res.statusCode === 200) {
@@ -200,7 +226,7 @@ app.get("/cerrarSesion",auth,(req, res)=>{
 
 
 // set port, listen for requests
-const PORT = process.env.PORT || API_PORT;
+const PORT = process.env.PORT || 7071;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
