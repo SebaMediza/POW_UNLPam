@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 
 const page = ({ params }) => {
     const getPeli = async () => {
-        const peli = ({})
         const api = 'http://localhost:7071/peliculas'
         const res = await fetch(`${api}/${params.movieid}`, {
             method: 'GET',

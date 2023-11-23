@@ -30,7 +30,7 @@ const page = () => {
     console.log(data.data);
 
     if (res.status === 200) {
-      sessionStorage.setItem('x-access-token', data.data.token);
+      sessionStorage.setItem('x-access-token', data.data.userData.token);
       sessionStorage.setItem('userName', data.data.userData.nombre);
       setIsLoading(false);
       router.refresh();

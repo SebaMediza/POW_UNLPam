@@ -8,15 +8,32 @@ import '@/public/assets/css/BarraBusqueda.css'
 const page = () => {
     const api = 'http://localhost:7071/series'
     const getSeries = async () => {
-        const res = await fetch(api,{
+        const res = await fetch(api, {
             method: 'GET',
-            headers: { 'Content-Type': 'application/json', 'x-access-token' : sessionStorage.getItem('x-access-token')}
+            headers: { 'Content-Type': 'application/json', 'x-access-token': sessionStorage.getItem('x-access-token') }
         });
         const data = await res.json();
-        console.log(data.data);
         setData(data.data);
         setSearchData(data.data);
         setLoading(false);
+    }
+
+    const editSerie = async (idmovie) => {
+        const res = await fetch(`${api}/${idmovie}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'x-access-token': sessionStorage.getItem('x-access-token') }
+        });
+        const data = await res.json();
+        getSeries();
+    }
+
+    const deleteSerie = async (idmovie) => {
+        const res = await fetch(`${api}/${idmovie}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json', 'x-access-token': sessionStorage.getItem('x-access-token') }
+        });
+        const data = await res.json();
+        getSeries();
     }
 
     useEffect(() => {
@@ -62,7 +79,7 @@ const page = () => {
                         </div>
                     </div>
                     <br />
-                        <CardSerie producciones={data} />
+                    <CardSerie producciones={data} editSerie={editSerie} deleteSerie={deleteSerie}/>
                 </div>
             )}
         </>

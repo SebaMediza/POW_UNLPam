@@ -4,7 +4,6 @@ import Card from "@/components/Card"
 
 import '@/public/assets/css/Card.css'
 import '@/public/assets/css/BarraBusqueda.css'
-import EditForm from "@/components/EditForm"
 
 const page = () => {
     const api = 'http://localhost:7071/peliculas'
