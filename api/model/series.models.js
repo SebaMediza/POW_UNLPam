@@ -130,7 +130,6 @@ Serie.searchByGender = (genero, res) =>{
                 res(500, err);
                 return;
             }
-            
             if (data.length > 0) {
                 res(null, data);
             } else {

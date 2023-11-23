@@ -40,9 +40,7 @@ app.use((req, res, next) => {
 
   // Añade el encabezado necesario para la autenticación
   res.header('x-access-token', global.myAppToken);
-  const miCampo = req.headers['x-access-token'];
-  console.log("campo seteado en el header es: " + miCampo);
-  
+ 
   // Continúa con el siguiente middleware o manejador de ruta
   next();
 });
@@ -52,7 +50,7 @@ app.get('/', main.auth);
 
 app.get('/home', auth,(req, res)=>{
   if (res && res.statusCode === 200) {
-    main.home
+    main.home(req, res) 
   }else{
     console.log("error no es posible ir a la home dado que no ha iniciado sesion: "+  res.status);
   }
@@ -62,7 +60,7 @@ app.get('/home', auth,(req, res)=>{
 //Todo lo referido a peliculas
 app.post("/peliculas", auth,(req, res)=>{
   if (res && res.statusCode === 200) {
-    pelicula.create 
+    pelicula.create(req, res) 
   }else{
     console.log("error no es posible acceder a esta ruta: "+  res.status);
   }
@@ -72,8 +70,7 @@ app.post("/peliculas", auth,(req, res)=>{
 app.get("/peliculas", auth,(req, res)=>{
   console.log("llega al get peliculas");
   if (res && res.statusCode === 200) {
-    console.log("entra al if");
-    pelicula.list(res) 
+    pelicula.list(req, res) 
   }else{
     console.log("error no es posible ir a la home dado que no ha iniciado sesion: "+  res.status);
   }
@@ -81,7 +78,7 @@ app.get("/peliculas", auth,(req, res)=>{
 //ruta para buscar una pelicula por id
 app.get("/peliculas/:id", auth,(req, res)=>{
   if (res && res.statusCode === 200) {
-    pelicula.getId
+    pelicula.getId(req, res) 
   }else{
     console.log("error no es posible ir a la home dado que no ha iniciado sesion: "+  res.status);
   }
@@ -89,7 +86,7 @@ app.get("/peliculas/:id", auth,(req, res)=>{
 //ruta para actualizar una pelicula por su id
 app.post("/peliculas/:id", auth,(req, res)=>{
   if (res && res.statusCode === 200) {
-    pelicula.update
+    pelicula.update(req, res) 
   }else{
     console.log("error no es posible ir a la home dado que no ha iniciado sesion: "+  res.status);
   }
@@ -97,7 +94,7 @@ app.post("/peliculas/:id", auth,(req, res)=>{
 //ruta para eliminar una pelicula por su id
 app.delete("/peliculas/:id", auth,(req, res)=>{
   if (res && res.statusCode === 200) {
-    pelicula.delete
+    pelicula.delete(req, res) 
   }else{
     console.log("error no es posible ir a la home dado que no ha iniciado sesion: "+  res.status);
   }
@@ -105,7 +102,7 @@ app.delete("/peliculas/:id", auth,(req, res)=>{
 //ruta para eliminar todas las peliculas de la bd
 app.delete("/peliculas", auth,(req, res)=>{
   if (res && res.statusCode === 200) {
-    pelicula.deleteAll
+    pelicula.deleteAll(req, res) 
   }else{
     console.log("error no es posible ir a la home dado que no ha iniciado sesion: "+  res.status);
   }
@@ -114,59 +111,59 @@ app.delete("/peliculas", auth,(req, res)=>{
 //Todo lo referido a series
 app.post("/series", auth,(req, res)=>{
   if (res && res.statusCode === 200) {
-    serie.create
+    serie.create(req, res) 
   }else{
     console.log("error no es posible ir a la home dado que no ha iniciado sesion: "+  res.status);
   }
 });
 app.get("/series", auth,(req, res)=>{
   if (res && res.statusCode === 200) {
-    serie.list
+    serie.list(req, res) 
   }else{
     console.log("error no es posible ir a la home dado que no ha iniciado sesion: "+  res.status);
   }
 });
 app.get("/series/:id", auth,(req, res)=>{
   if (res && res.statusCode === 200) {
-    serie.getId 
+    serie.getId(req, res)  
   }else{
     console.log("error no es posible ir a la home dado que no ha iniciado sesion: "+  res.status);
   }
 });
 app.post("/series/:id", auth,(req, res)=>{
   if (res && res.statusCode === 200) {
-    serie.update
+    serie.update(req, res) 
   }else{
     console.log("error no es posible ir a la home dado que no ha iniciado sesion: "+  res.status);
   }
 });
 app.delete("/series/:id", auth,(req, res)=>{
   if (res && res.statusCode === 200) {
-    serie.delete
+    serie.delete(req, res) 
   }else{
     console.log("error no es posible ir a la home dado que no ha iniciado sesion: "+  res.status);
   }
 });
 app.delete("/series", auth,(req, res)=>{
   if (res && res.statusCode === 200) {
-    serie.deleteAll
+    serie.deleteAll(req, res) 
   }else{
     console.log("error no es posible ir a la home dado que no ha iniciado sesion: "+  res.status);
   }
 });
 
 
-app.get("/genero", auth,(req, res)=>{
+app.get("/pelicula/genero", auth,(req, res)=>{
   if (res && res.statusCode === 200) {
-    pelicula.searchByGender
+    pelicula.searchByGender(req, res) 
   }else{
     console.log("error no es posible ir a la home dado que no ha iniciado sesion: "+  res.status);
   }
 });
 
-app.get("/genero", auth,(req, res)=>{
+app.get("/serie/genero", auth,(req, res)=>{
   if (res && res.statusCode === 200) {
-    serie.searchByGender
+    serie.searchByGender(req, res) 
   }else{
     console.log("error no es posible ir a la home dado que no ha iniciado sesion: "+  res.status);
   }

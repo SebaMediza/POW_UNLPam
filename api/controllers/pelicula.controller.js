@@ -83,7 +83,8 @@ exports.update = (req, res) => {
                         message: "error al actualizar la pelicula id" + req.params.id
                     });
                 }
-            } else res.send(data);
+            } else {console.log("update: " + data.status);
+                res.send(data);}
         }
     );
 }

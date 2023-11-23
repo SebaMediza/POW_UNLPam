@@ -112,7 +112,7 @@ exports.deleteAll = (req, res) => {
 };
 
 exports.searchByGender = (req, res) =>{
-    Pelicula.searchByGender(req.body.genero,(err, data) =>{
+    Serie.searchByGender(req.body.genero,(err, data) =>{
         if(err){
             console.log("ha ocurrido un error: " + err);
         }else{
