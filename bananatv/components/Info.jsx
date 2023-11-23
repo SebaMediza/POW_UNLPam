@@ -1,5 +1,6 @@
 import '../public/assets/js/Info.js'
 import '../public/assets/css/Movie.css'
+import Link from 'next/link.js'
 
 const Info = ({ produccion }) => {
     return (
@@ -44,9 +45,9 @@ const Info = ({ produccion }) => {
                             <br />
                         </div>
                         <div className='play'>
-                            <img src="/img/placeholder.png" alt="" />
-                            <br />
-                            <button className='btn btn-lg btn-warning'>Play</button>
+                            <Link href={produccion.urlPelicula}>
+                                <button className='btn btn-lg btn-warning'>Play</button>
+                            </Link>
                         </div>
                     </div>
                 </div>

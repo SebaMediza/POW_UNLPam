@@ -17,14 +17,14 @@ const page = () => {
     const [banner, setBanner] = useState('');
     const [imagen, setImagen] = useState('');
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         const api = 'http://localhost:7071/peliculas'
         e.preventDefault();
         const movie = { titulo, descripcion, fecha_lanzamiento, duracion, productor, director, genero, urlPelicula, banner, imagen };
-        
+
         const res = await fetch(api, {
             method: 'POST',
-            headers: { "Content-Type": "application/json", 'x-access-token' : sessionStorage.getItem('x-access-token') },
+            headers: { "Content-Type": "application/json", 'x-access-token': sessionStorage.getItem('x-access-token') },
             body: JSON.stringify(movie)
         })
         if (res.status === 200) {
@@ -77,10 +77,8 @@ const page = () => {
                             Movie URL:
                             <input type="text" value={urlPelicula} onChange={(e) => seturlPelicula(e.target.value)} />
                         </label>
-                        <label>
-                            Banner:
-                            <input type="text" value={banner} onChange={(e) => setBanner(e.target.value)} />
-                        </label>
+                        Banner:
+                        
                         <label>
                             Imagen:
                             <input type="text" value={imagen} onChange={(e) => setImagen(e.target.value)} />

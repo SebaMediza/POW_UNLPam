@@ -1,26 +1,15 @@
 'use client';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../public/assets/css/Nav.css';
+import { useRouter } from 'next/navigation';
 
 
 const Nav = () => {
+    const router = useRouter();
     const handleCerrarCerrarSesion = async (e) => {
-        const api = 'http://localhost:7071/cerrarSesion'
-        const nombre = sessionStorage.getItem('userName')
-
         e.preventDefault();
-        const res = await fetch(api, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                nombre
-            })
-        })
-        if (res.status === 200) {
-            console.log('Sesion cerrada')
-        }
+        sessionStorage.removeItem('x-access-token');
+        router.push('/');
     }
 
     return (
