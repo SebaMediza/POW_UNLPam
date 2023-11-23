@@ -1,18 +1,44 @@
 'use client'
 import { useEffect, useState } from "react"
-
-import '../../../public/assets/css/Card.css'
 import Card from "@/components/Card"
 
-const page = ({}) => {
+import '@/public/assets/css/Card.css'
+import '@/public/assets/css/BarraBusqueda.css'
+
+const page = () => {
     const api = 'http://localhost:7071/peliculas'
+
     const getPelis = async () => {
-        const res = await fetch(api);
+        const res = await fetch(api, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json', 'x-access-token': sessionStorage.getItem('x-access-token') }
+
+        });
         const data = await res.json();
-        console.log(data.data);
-        setData(data.data);
-        setSearchData(data.data);
+        console.log(data);
+        setData(data);
+        setSearchData(data);
         setLoading(false);
+    }
+
+    const editPeli = async (idmovie) => {
+        const res = await fetch(`${api}/${idmovie}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'x-access-token': sessionStorage.getItem('x-access-token') }
+        });
+        const data = await res.json();
+        console.log(data);
+        getPelis();
+    }
+
+    const deletePeli = async (idmovie) => {
+        const res = await fetch(`${api}/${idmovie}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json', 'x-access-token': sessionStorage.getItem('x-access-token') }
+        });
+        const data = await res.json();
+        console.log(data);
+        getPelis();
     }
 
     useEffect(() => {
@@ -48,14 +74,18 @@ const page = ({}) => {
                     <div className="title">
                         <h1>Peliculas</h1>
                     </div>
-                    <div className="busqueda">
-                        <input
-                            type="text"
-                            value={searchTerm}
-                            placeholder="Búsqueda por Nombre o Empresa"
-                            onChange={handleChange} />
+                    <div className="idk">
+                        <div className="busquedaContenedor">
+                            <input
+                                className="busqueda"
+                                type="text"
+                                value={searchTerm}
+                                placeholder="Búsqueda por Nombre o Empresa"
+                                onChange={handleChange} />
+                        </div>
                     </div>
-                    <Card producciones={data} />
+                    <br />
+                    <Card producciones={data} deletePeli={deletePeli} editPeli={editPeli}/>
                 </div>
             )}
         </>

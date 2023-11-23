@@ -120,4 +120,26 @@ Serie.removeAll = result => {
 
 }
 
+
+Serie.searchByGender = (genero, res) =>{
+    if (genero.trim() !== "") {
+        
+        sql.query(`SELECT * FROM serie WHERE lower(genero) like "%${genero}%"`, (err, data)=>{
+            if (err) {
+                console.log("error en la sql: " + err);
+                res(500, err);
+                return;
+            }
+            if (data.length > 0) {
+                res(null, data);
+            } else {
+                console.log("No se encontraron serie para el género: " + genero);
+                res(404, "No se encontraron serie para el género: " + genero);
+            }
+        });
+    }else{
+        res(404, "no se puede buscar por un genero vacio");
+    }
+}
+
 module.exports = Serie;

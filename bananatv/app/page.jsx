@@ -3,7 +3,7 @@ import '../public/assets/css/auth.css'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-const page = ({}) => {
+const page = () => {
   const router = useRouter()
 
   const [nombre, setNombre] = useState('');
@@ -26,7 +26,12 @@ const page = ({}) => {
       body: JSON.stringify({ nombre, password })
     })
 
+    const data = await res.json();
+    console.log(data.data);
+
     if (res.status === 200) {
+      sessionStorage.setItem('x-access-token', data.data.userData.token);
+      sessionStorage.setItem('userName', data.data.userData.nombre);
       setIsLoading(false);
       router.refresh();
       router.push('/pages');
@@ -44,6 +49,7 @@ const page = ({}) => {
     })
 
     if (res.status === 200) {
+      setUserToken(data.token)
       setIsLoading(false);
       router.refresh();
       router.push('/pages');

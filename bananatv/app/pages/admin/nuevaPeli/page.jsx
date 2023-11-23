@@ -2,8 +2,10 @@
 import '../../../../public/assets/css/Admin.css';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const page = () => {
+    const router = useRouter();
     const [titulo, settitulo] = useState('');
     const [descripcion, setdescripcion] = useState('');
     const [fecha_lanzamiento, setfecha_lanzamiento] = useState('');
@@ -15,17 +17,21 @@ const page = () => {
     const [banner, setBanner] = useState('');
     const [imagen, setImagen] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         const api = 'http://localhost:7071/peliculas'
         e.preventDefault();
         const movie = { titulo, descripcion, fecha_lanzamiento, duracion, productor, director, genero, urlPelicula, banner, imagen };
-        fetch(api, {
+
+        const res = await fetch(api, {
             method: 'POST',
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", 'x-access-token': sessionStorage.getItem('x-access-token') },
             body: JSON.stringify(movie)
-        }).then(() => {
-            console.log('new movie added');
         })
+        if (res.status === 200) {
+            alert('Pelicula agregada con exito');
+            router.push('/pages/admin');
+        }
+
     };
 
     return (
@@ -71,10 +77,8 @@ const page = () => {
                             Movie URL:
                             <input type="text" value={urlPelicula} onChange={(e) => seturlPelicula(e.target.value)} />
                         </label>
-                        <label>
-                            Banner:
-                            <input type="text" value={banner} onChange={(e) => setBanner(e.target.value)} />
-                        </label>
+                        Banner:
+                        
                         <label>
                             Imagen:
                             <input type="text" value={imagen} onChange={(e) => setImagen(e.target.value)} />

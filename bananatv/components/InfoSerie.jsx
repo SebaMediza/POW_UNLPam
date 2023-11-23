@@ -1,6 +1,5 @@
 import '../public/assets/js/Info.js'
 import '../public/assets/css/Movie.css'
-import Link from 'next/link.js'
 
 const Info = ({ produccion }) => {
     return (
@@ -32,22 +31,24 @@ const Info = ({ produccion }) => {
                             <div>{produccion.descripcion}</div>
                             <hr />
                             <div className='info'>
+                                {produccion.productor}
                                 <button data-toggle="collapse" data-target="#masInfo" className='btn btn-outline-warning btn-sm'>Mas Info</button>
                             </div>
                             <div className='collapse' id='masInfo'>
                                 <hr />
-                                <p>Productor: {produccion.productor}</p>
                                 <p>Generos: {produccion.genero}</p>
                                 <p>Director: {produccion.director}</p>
                                 <p>Estreno: {produccion.fecha_lanzamiento}</p>
                                 <p>Duracion: {produccion.duracion} minutos</p>
+                                <p>Temporadas: {produccion.temporadas}</p>
+                                <p>Capitulos: {produccion.caputulos}</p>
                             </div>
                             <br />
                         </div>
                         <div className='play'>
-                            <Link href={produccion.urlPelicula}>
-                                <button className='btn btn-lg btn-warning'>Play</button>
-                            </Link>
+                            <img src="/img/placeholder.png" alt="" />
+                            <br />
+                            <button className='btn btn-lg btn-warning'>Play</button>
                         </div>
                     </div>
                 </div>

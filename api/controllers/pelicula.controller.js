@@ -29,13 +29,19 @@ exports.create = (req, res) => {
 };
 
 exports.list = (req, res) => {
+    console.log("llega al listado");
     Pelicula.getAll((err, data) => {
         if (err) {
             res.status(500).send({
                 message:
                     err.message || "error al encontrar las peliculas"
             })
-        } else res.send({ "status": 200, "data": data });
+        }  
+        try {
+            res.send(data);
+        } catch (error) {
+            console.log("error: " + error);
+        }
     });
 };
 
@@ -77,7 +83,8 @@ exports.update = (req, res) => {
                         message: "error al actualizar la pelicula id" + req.params.id
                     });
                 }
-            } else res.send(data);
+            } else {console.log("update: " + data.status);
+                res.send(data);}
         }
     );
 }
@@ -110,3 +117,13 @@ exports.deleteAll = (req, res) => {
         } else res.send({ "status": 200, "data": data });
     });
 };
+
+exports.searchByGender = (req, res) =>{
+    Pelicula.searchByGender(req.body.genero,(err, data) =>{
+        if(err){
+            console.log("ha ocurrido un error: " + err);
+        }else{
+            res.send(data);
+        }
+    })
+}
