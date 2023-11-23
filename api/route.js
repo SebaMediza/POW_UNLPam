@@ -70,8 +70,10 @@ app.post("/peliculas", auth,(req, res)=>{
 
 //ruta para listar las peliculas
 app.get("/peliculas", auth,(req, res)=>{
+  console.log("llega al get peliculas");
   if (res && res.statusCode === 200) {
-    pelicula.list 
+    console.log("entra al if");
+    pelicula.list(res) 
   }else{
     console.log("error no es posible ir a la home dado que no ha iniciado sesion: "+  res.status);
   }
