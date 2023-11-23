@@ -18,7 +18,7 @@ const User = function (user) {
 User.login = async (user, callback) => {
   const password = user.password;
 
-  await sql.query(`SELECT * FROM usuarios WHERE nombre = '${user.nombre}'`, async (err, resSql) => {
+  await sql.query(`SELECT * FROM usuarios WHERE mail = '${user.mail}'`, async (err, resSql) => {    
     if (err) {
       callback(err, null);
       return;
@@ -97,7 +97,7 @@ User.registro = (user, tarjeta, result) => {
             return;
           }
           console.log("Tarjeta añadida: ", { id: res.insertId, ...tarjeta });
-          result(null, { id: res.insertId, ...tarjeta });
+          result(null, { id: res.insertId, ...user });
         });
       }
     });

@@ -23,7 +23,7 @@ const page = () => {
     const res = await fetch(api, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nombre, password })
+      body: JSON.stringify({ mail, password })
     })
 
     const data = await res.json();
@@ -48,11 +48,14 @@ const page = () => {
       body: JSON.stringify({ nombre, mail, password, tipoPlan, nroTarjeta, cardholderName, vencimiento, ccv })
     })
 
+    const data = await res.json();
+    console.log(data);
+
     if (res.status === 200) {
-      setUserToken(data.token)
+      alert('Usuario creado correctamente, ahora ya podes ingresar a tu cuenta');
       setIsLoading(false);
       router.refresh();
-      router.push('/pages');
+      router.push('/');
     }
   }
 
@@ -142,8 +145,8 @@ const page = () => {
           <input
             type="text"
             placeholder="Name"
-            onChange={(e) => setNombre(e.target.value)}
-            value={nombre} />
+            onChange={(e) => setMail(e.target.value)}
+            value={mail} />
           <input
             type="password"
             placeholder="Password"
