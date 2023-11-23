@@ -27,11 +27,11 @@ const page = () => {
     })
 
     const data = await res.json();
+    console.log(data.data);
 
     if (res.status === 200) {
-      //console.log(data.token);
-      const expirationDate = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 365);
-      document.cookie = `token=${data.token}; expires=${expirationDate.toUTCString()}; path=/`;
+      sessionStorage.setItem('x-access-token', data.data.token);
+      sessionStorage.setItem('userName', data.data.userData.nombre);
       setIsLoading(false);
       router.refresh();
       router.push('/pages');

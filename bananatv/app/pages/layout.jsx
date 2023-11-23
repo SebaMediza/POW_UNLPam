@@ -1,4 +1,3 @@
-import Nav from '@/components/Nav'
 import NavAdmin from '@/components/NavAdmin'
 import '../../public/assets/css/Global.css'
 

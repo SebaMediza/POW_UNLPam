@@ -1,6 +1,8 @@
 import Link from 'next/link'
 
-const Card = ({producciones}) => {
+import '@/public/assets/css/Card.css'
+
+const Card = ({ producciones, editPeli, deletePeli }) => {
     return (
         <div className="cardContainer">
             {producciones.map((item) => (
@@ -10,6 +12,14 @@ const Card = ({producciones}) => {
                     </Link>
                     <div className="card-body">
                         <h5 className="card-title">{item.titulo}</h5>
+                        <hr />
+                        <button data-toggle="collapse" data-target="#dangerZone" className='btn btn-danger btn-lg'>Danger Zone</button>
+                        <div className='collapse dangerZone' id='dangerZone'>
+                            <Link href={`/pages/peliculas/editar/${item.idMovie}`}>
+                                <button className='btn btn-warning' onClick={() => editPeli(item)}>Editar Contenido</button>
+                            </Link>
+                            <button className='btn btn-danger' onClick={() => deletePeli(item.idMovie)}>Borrar</button>
+                        </div>
                     </div>
                 </div>
             ))}

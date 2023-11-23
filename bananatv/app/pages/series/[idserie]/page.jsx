@@ -1,13 +1,16 @@
 'use client'
 
 import { useState, useEffect } from "react"
-import '../../../public/assets/css/Movie.css'
-import Info from "@/components/Info"
+import '../../../../public/assets/css/Movie.css'
+import InfoSerie from "@/components/InfoSerie"
 
 const page = ({ params }) => {
     const getPeli = async () => {
         const api = 'http://localhost:7071/series'
-        const res = await fetch(`${api}/${params.idserie}`);
+        const res = await fetch(`${api}/${params.idserie}`, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json', 'x-access-token': sessionStorage.getItem('x-access-token') }
+        });
         const data = await res.json();
         console.log(data);
         setData(data);
@@ -25,7 +28,7 @@ const page = ({ params }) => {
     return (
         <>
             {loading ? (<p>Cargando...</p>) : (
-                <Info produccion={data} />
+                <InfoSerie produccion={data} />
             )}
         </>
     )

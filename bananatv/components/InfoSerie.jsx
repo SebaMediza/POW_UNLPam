@@ -31,15 +31,17 @@ const Info = ({ produccion }) => {
                             <div>{produccion.descripcion}</div>
                             <hr />
                             <div className='info'>
+                                {produccion.productor}
                                 <button data-toggle="collapse" data-target="#masInfo" className='btn btn-outline-warning btn-sm'>Mas Info</button>
                             </div>
                             <div className='collapse' id='masInfo'>
                                 <hr />
-                                <p>Productor: {produccion.productor}</p>
                                 <p>Generos: {produccion.genero}</p>
                                 <p>Director: {produccion.director}</p>
                                 <p>Estreno: {produccion.fecha_lanzamiento}</p>
                                 <p>Duracion: {produccion.duracion} minutos</p>
+                                <p>Temporadas: {produccion.temporadas}</p>
+                                <p>Capitulos: {produccion.caputulos}</p>
                             </div>
                             <br />
                         </div>
