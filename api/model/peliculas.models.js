@@ -5,10 +5,12 @@ const Pelicula = function (pelicula) {
     this.descripcion = pelicula.descripcion,
     this.fecha_lanzamiento = pelicula.fecha_lanzamiento,
     this.duracion = pelicula.duracion,
+    this.productor = pelicula.productor,
     this.director = pelicula.director,
     this.genero = pelicula.genero,
     this.urlPelicula = pelicula.urlPelicula,
-    this.image = pelicula.image
+    this.banner = pelicula.banner,
+    this.imagen = pelicula.image
 };
 
 Pelicula.create = (newPelicula, result) => {
@@ -40,6 +42,7 @@ Pelicula.findById = (id, result) => {
 };
 
 Pelicula.getAll = (result) => {
+    console.log("llega al modelo");
     let query = "SELECT * FROM pelicula";
     sql.query(query, (err, res) => {
         if (err) {
@@ -47,7 +50,6 @@ Pelicula.getAll = (result) => {
             result(null, err);
             return;
         }
-        console.log("peliculas: ", res);
         result(null, res);
     });
 };
@@ -117,6 +119,28 @@ Pelicula.removeAll = result => {
         result(null, res);
     });
 
+}
+
+Pelicula.searchByGender = (genero, res) =>{
+    if (genero.trim() !== "") {
+        
+        sql.query(`SELECT * FROM pelicula WHERE lower(genero) like "%${genero}%"`, (err, data)=>{
+            if (err) {
+                console.log("error en la sql: " + err);
+                res(500, err);
+                return;
+            }
+            
+            if (data.length > 0) {
+                res(null, data);
+            } else {
+                console.log("No se encontraron películas para el género: " + genero);
+                res(404, "No se encontraron películas para el género: " + genero);
+            }
+        });
+    }else{
+        res(404, "no se puede buscar por un genero vacio");
+    }
 }
 
 module.exports = Pelicula;
