@@ -1,5 +1,6 @@
-import { Button, Text, View, StyleSheet, FlatList } from "react-native";
+import { Button, Text, View, StyleSheet, ScrollView } from "react-native";
 import React, { useEffect, useState } from 'react';
+import Event from "../components/Event";
 
 function HomeScreen({ navigation }) {
   const [peliculas, setPeliculas] = useState(null);
@@ -36,19 +37,13 @@ function HomeScreen({ navigation }) {
     // Llamar a la función de solicitud cuando el componente se monta
     fetchData();
   }, []); // La dependencia vacía asegura que useEffect se ejecute solo una vez al montar el componente
-  {console.log(peliculas)}
 
     return (
         <ScrollView style={styles.container}>
             <View style={styles.section}>
                 <Text style={styles.sectionTitle}>Next Events</Text>
-                {Event(data,{navigation},true)}
+                {Event(peliculas,{navigation},true)}
                 <Button title="More Next Events" color={"black"} onPress={() => navigation.navigate('Next Events')}></Button>                   
-            </View>
-            <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Past Events</Text>
-                {Event(data,{navigation},true)}
-                <Button title="More Past Events" color={"black"} onPress={() => navigation.navigate('Past Events')}></Button>
             </View>
         </ScrollView>
     );
