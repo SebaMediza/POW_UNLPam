@@ -1,5 +1,6 @@
 import React from "react";
-import { Button, Text, View, StyleSheet, FlatList } from "react-native";
+import { Button, Text, View, StyleSheet, ScrollView} from "react-native";
+import Event from "../components/Event";
 
 function HomeScreen ({navigation}) {
     const data = [
@@ -12,43 +13,19 @@ function HomeScreen ({navigation}) {
       ];
 
     return (
-      
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <View style={styles.section}>
                 <Text style={styles.sectionTitle}>Next Events</Text>
-                <FlatList
-                    data={data}
-                    keyExtractor={(item) => item.id}
-                    horizontal={true} // Configura la lista como horizontal
-                    showsHorizontalScrollIndicator={false}
-                    renderItem={({ item }) => (     
-                      <View style={{ margin: 10, padding: 50, backgroundColor: 'lightgray' }}>
-                          <Text>{item.text}</Text>
-                          <Button title="Details" onPress={()=> navigation.navigate("DetailStackScreen")}></Button>
-                      </View>                     
-                    )}
-                />
-                <Button title="More Next Events" color={"black"} onPress={() => navigation.navigate('Next Events')}></Button>                    
+                {Event(data,{navigation},true)}
+                <Button title="More Next Events" color={"black"} onPress={() => navigation.navigate('Next Events')}></Button>                   
             </View>
             <View style={styles.section}>
                 <Text style={styles.sectionTitle}>Past Events</Text>
-                <FlatList
-                    data={data}
-                    keyExtractor={(item) => item.id}
-                    horizontal={true} // Configura la lista como horizontal
-                    showsHorizontalScrollIndicator={false}
-                    renderItem={({ item }) => (
-                      <View style={{ margin: 10, padding: 50, backgroundColor: 'lightgray' }}>
-                          <Text>{item.text}</Text>
-                          <Button title="Details" onPress={()=> navigation.navigate("DetailStackScreen")}></Button>
-                      </View>
-                    )}
-                />
+                {Event(data,{navigation},true)}
                 <Button title="More Past Events" color={"black"} onPress={() => navigation.navigate('Past Events')}></Button>
             </View>
-        </View>
-      
-  );
+        </ScrollView>
+    );
 }
 
 const styles = StyleSheet.create({
