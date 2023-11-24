@@ -113,12 +113,12 @@ const page = () => {
             onChange={(e) => setccv(e.target.value)}
             value={ccv}
           />
-          <button type='submit'>Sign Up</button>
+          <button type='submit'>Registrame</button>
         </form>
       </div>
       <div className="form-container sign-in">
         <form onSubmit={handleLogin}>
-          <h1>Sign In</h1>
+          <h1>Inicia Sesion</h1>
           <div className="social-icons">
             <a href="#" className="icon">
               <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">
@@ -152,25 +152,25 @@ const page = () => {
             placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
             value={password} />
-          <a href="#">Forget Your Password?</a>
+          <a href="#">Olvidaste tu Contaseña?</a>
           <button
             type='submit'
             disabled={isLoading}>
             {isLoading && <span>Verificando...</span>}
-            {!isLoading && <span>Sign In</span>}
+            {!isLoading && <span>Ingresar</span>}
           </button>
         </form>
       </div>
       <div className="toggle-container">
         <div className="toggle">
           <div className="toggle-panel toggle-left">
-            <h1>Hello, Friend!</h1>
+            <h1>Bienvenido a BananaTV</h1>
             <p>Completa todos los campos para crear una nueva cuenta</p>
             <p>Ya tenes cuenta?</p>
             <button className="hidden" id="login">Inicia Sesion</button>
           </div>
           <div className="toggle-panel toggle-right">
-            <h1>Welcome Back!</h1>
+            <h1>Bienvenido de Nuevo!</h1>
             <p>Ingresa a tu cuenta con tus datos</p>
             <p>No tenes cuenta?</p>
             <button className="hidden" id="register">Registrase</button>
