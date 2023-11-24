@@ -41,7 +41,7 @@ function PastEventsScreen({navigation}){
 
   return (
     <View>
-      {Event(eventosData,{navigation},false)}
+      {Event(eventosOrdenados,{navigation},false)}
     </View>
   );
 };
