@@ -110,9 +110,17 @@ app.delete("/peliculas", auth,(req, res)=>{
 });
 
 //ruta para listar las proximas peliculas
-app.get("/proximamente",auth, (req, res) => {
+app.get("/proximamentePelicula",auth, (req, res) => {
   if(res && res.statusCode === 200)
     pelicula.proximamente(req, res);
+  else
+    console.log("error no es posible");
+})
+
+//ruta para listar las proximas series
+app.get("/proximamenteSerie",auth, (req, res) => {
+  if(res && res.statusCode === 200)
+    serie.proximamente(req, res);
   else
     console.log("error no es posible");
 })
