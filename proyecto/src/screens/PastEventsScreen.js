@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { View} from 'react-native';
 import Event from "../components/Event";
 
 const eventosData = [
