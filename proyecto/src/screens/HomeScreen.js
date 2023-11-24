@@ -38,13 +38,20 @@ function HomeScreen({ navigation }) {
   }, []); // La dependencia vacía asegura que useEffect se ejecute solo una vez al montar el componente
   {console.log(peliculas)}
 
-  return (
-
-    <View style={styles.container}>
-      
-    </View>
-
-  );
+    return (
+        <ScrollView style={styles.container}>
+            <View style={styles.section}>
+                <Text style={styles.sectionTitle}>Next Events</Text>
+                {Event(data,{navigation},true)}
+                <Button title="More Next Events" color={"black"} onPress={() => navigation.navigate('Next Events')}></Button>                   
+            </View>
+            <View style={styles.section}>
+                <Text style={styles.sectionTitle}>Past Events</Text>
+                {Event(data,{navigation},true)}
+                <Button title="More Past Events" color={"black"} onPress={() => navigation.navigate('Past Events')}></Button>
+            </View>
+        </ScrollView>
+    );
 }
 
 const styles = StyleSheet.create({
