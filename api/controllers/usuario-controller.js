@@ -49,7 +49,9 @@ exports.login = (req, res) =>{
                 });
             }
         } else {
-            res.sendStatus(data);
+            //res.sendStatus(data);
+            res.status(200).json({ message: "Inicio de sesión exitoso", data });
+
         }
     });
 
