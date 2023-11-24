@@ -109,6 +109,14 @@ app.delete("/peliculas", auth,(req, res)=>{
   }
 });
 
+//ruta para listar las proximas peliculas
+app.get("/proximamente",auth, (req, res) => {
+  if(res && res.statusCode === 200)
+    pelicula.proximamente(req, res);
+  else
+    console.log("error no es posible");
+})
+
 //Todo lo referido a series
 app.post("/series", auth,(req, res)=>{
   if (res && res.statusCode === 200) {
