@@ -14,6 +14,7 @@ const serie = require("./controllers/serie.controller.js");
 const main = require('./controllers/main.controller.js')
 const usuarios = require('./controllers/usuario-controller')
 const auth = require("./middleware/auth");
+const favorite = require("./controllers/favorite.controller.js")
 
 
 // Initialize express router
@@ -76,7 +77,7 @@ app.get("/peliculas", auth,(req, res)=>{
   }
 });
 //ruta para buscar una pelicula por id
-app.get("/peliculas/:id", auth,(req, res)=>{
+app.get("/peliculas/:id",(req, res)=>{
   if (res && res.statusCode === 200) {
     pelicula.getId(req, res) 
   }else{
@@ -107,6 +108,35 @@ app.delete("/peliculas", auth,(req, res)=>{
     console.log("error no es posible ir a la home dado que no ha iniciado sesion: "+  res.status);
   }
 });
+
+//ruta para listar las proximas peliculas
+app.get("/proximamentePelicula",auth, (req, res) => {
+  if(res && res.statusCode === 200)
+    pelicula.proximamente(req, res);
+  else
+    console.log("error no es posible");
+})
+//ruta para listar las proximas series
+app.get("/peliculaPasadas",auth, (req, res) => {
+  if(res && res.statusCode === 200)
+    pelicula.pasadas(req, res);
+  else
+    console.log("error no es posible");
+})
+
+//ruta para listar las proximas series
+app.get("/proximamenteSerie",auth, (req, res) => {
+  if(res && res.statusCode === 200)
+    serie.proximamente(req, res);
+  else
+    console.log("error no es posible");
+})
+app.get("/seriePasadas",auth, (req, res) => {
+  if(res && res.statusCode === 200)
+    serie.pasadas(req, res);
+  else
+    console.log("error no es posible");
+})
 
 //Todo lo referido a series
 app.post("/series", auth,(req, res)=>{
@@ -169,6 +199,30 @@ app.get("/serie/genero", auth,(req, res)=>{
   }
 });
 
+//todo lo referido a favoritos
+app.post("/favorite",auth,(req, res)=>{
+  if (res && res.statusCode === 200) {
+    favorite.create(req, res) 
+  }else{
+    console.log("error no es posible ir a la home dado que no ha iniciado sesion: "+  res.status);
+  }
+});
+
+app.get("/favorite",auth,(req, res)=>{
+  if (res && res.statusCode === 200) {
+    favorite.list(req, res) 
+  }else{
+    console.log("error no es posible ir a la home dado que no ha iniciado sesion: "+  res.status);
+  }
+});
+
+app.delete("/favorite/:id",auth,(req, res)=>{
+  if (res && res.statusCode === 200) {
+    favorite.delete(req, res) 
+  }else{
+    console.log("error no es posible ir a la home dado que no ha iniciado sesion: "+  res.status);
+  }
+});
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -187,6 +241,7 @@ app.post("/login", usuarios.login);
 app.get("/solologueado", auth,(req, res) => {
   res.json({ message: "Hola soy la api de node" });
 });
+
 
 
 //ruta para cerrar sesion. Antes de poder cerrar sesion chequea si tiene token es decir si esta logeado.

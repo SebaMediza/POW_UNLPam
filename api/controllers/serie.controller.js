@@ -13,6 +13,7 @@ exports.create = (req, res) => {
         descripcion: req.body.descripcion,
         fecha_lanzamiento: req.body.fecha_lanzamiento,
         temporadas: req.body.temporadas,
+        producer: req.body.producer,
         director: req.body.director,
         genero: req.body.genero,
         urlSerie: req.body.urlSerie,
@@ -120,3 +121,34 @@ exports.searchByGender = (req, res) =>{
         }
     })
 }
+
+exports.proximamente  = (req, res) => {
+    Serie.proximamente((err, data) => {
+        if (err) {
+            res.status(500).send({
+                message:
+                    err.message || "error no hay series proximas"
+            })
+        }  
+        try {
+            res.send(data);
+        } catch (error) {
+            console.log("error: " + error);
+        }
+    });
+};
+exports.pasadas  = (req, res) => {
+    Serie.pasadas((err, data) => {
+        if (err) {
+            res.status(500).send({
+                message:
+                    err.message || "error no hay series proximas"
+            })
+        }  
+        try {
+            res.send(data);
+        } catch (error) {
+            console.log("error: " + error);
+        }
+    });
+};
