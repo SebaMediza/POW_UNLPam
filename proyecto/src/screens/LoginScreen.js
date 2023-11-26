@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const LoginScreen = ({navigation}) => {
-  const [email, setEmail] = useState('');
+const LoginScreen = ({ navigation }) => {
+  const [nombre, setNombre] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    // Aquí puedes agregar la lógica de autenticación
-    // Por ejemplo, puedes hacer una llamada a una API para verificar las credenciales
-    // y luego navegar a la pantalla principal si la autenticación es exitosa.
-    console.log('Email:', email);
-    console.log('Password:', password);
-    // Agrega tu lógica de autenticación aquí
-    navigation.navigate('HomeTabNavigator')
+  const handleLogin = async () => {
+    const usuario = { nombre, password };
+    const data = await fetch('http://localhost:7071/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(usuario),
+    });
+    const response = await data.json();
+    console.log(response);
+    navigation.navigate('HomeTabNavigator');
   };
 
   return (
@@ -20,9 +25,9 @@ const LoginScreen = ({navigation}) => {
       <Text style={styles.title}>Iniciar Sesión</Text>
       <TextInput
         style={styles.input}
-        placeholder="Correo Electrónico"
-        onChangeText={(text) => setEmail(text)}
-        value={email}
+        placeholder="Nombre"
+        onChangeText={(text) => setNombre(text)}
+        value={nombre}
       />
       <TextInput
         style={styles.input}
