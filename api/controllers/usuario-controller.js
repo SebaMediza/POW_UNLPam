@@ -1,6 +1,12 @@
 const User = require("../model/usuario-model.js");
 const Tarjeta = require("../model/tarjeta-model.js");
 
+const {GOOGLE_APPLICATION_CREDENTIALS} = process.env
+const FCM = require('fcm-node');
+const serverKey = require(GOOGLE_APPLICATION_CREDENTIALS)
+const fcm = new FCM(serverKey);
+
+
 exports.registro = (req, res) => {
     // Validate request
     if (!req.body) {
@@ -9,16 +15,16 @@ exports.registro = (req, res) => {
         });
     }
     const user = new User({
-      nombre : req.body.nombre,
-      mail : req.body.mail,
-      password : req.body.password,
-      tipoPlan : req.body.tipoPlan
+        nombre: req.body.nombre,
+        mail: req.body.mail,
+        password: req.body.password,
+        tipoPlan: req.body.tipoPlan
     });
-    
+
     const tarjeta = new Tarjeta({
-        nroTarjeta : req.body.nroTarjeta,
-        vencimiento :  req.body.vencimiento,
-        ccv : req.body.ccv,
+        nroTarjeta: req.body.nroTarjeta,
+        vencimiento: req.body.vencimiento,
+        ccv: req.body.ccv,
         idUsuario: '',   //cambiar por la consulta a la bd para saber cual es el usaurio que la carga
     });
     User.registro(user, tarjeta, (err, data) => {
@@ -28,16 +34,16 @@ exports.registro = (req, res) => {
             });
         else res.send(data);
     });
-    
+
 };
 
-exports.login = (req, res) =>{
+exports.login = (req, res) => {
     const user = new User({
-        nombre : req.body.nombre,
+        nombre: req.body.nombre,
         mail: req.body.mail,
         password: req.body.password
     });
-    User.login(user,(err, data) => {
+    User.login(user, (err, data) => {
         if (err) {
             if (err.kind === "not_found") {
                 res.status(404).send({
@@ -55,4 +61,54 @@ exports.login = (req, res) =>{
         }
     });
 
+}
+
+exports.enviarNotificacion = (req, res) => {
+
+    User.notification((err, users) => {
+        console.log(users);
+
+        if (err) {
+            return res.status(500).json({ error: 'Error al obtener usuarios' });
+        }
+
+        const tokens = users.map(user => user.token).filter(token => !!token);
+
+        tokens.forEach(token => {
+            const message = {
+                to: token,
+                notification: {
+                    title: 'No te pierdas los nuevos lanzamientos',
+                    body: 'Lo mejor esta por llegar a BananaTV'
+                }
+            };
+
+            fcm.send(message, (err, res) => {
+                if (err) {
+                    console.error('¡Algo salió mal al enviar la notificación a', token, '!', err);
+                } else {
+                    console.log('Notificación enviada exitosamente a', token, 'con respuesta:', res);
+                }
+            });
+        });
+        res.status(200).json({ message: 'Notificaciones enviadas correctamente.' });
+
+
+        /* const payload = {
+            notification: {
+                title: '¡No te pierdas los nuevos lanzamientos',
+                body: 'Descubre las ultimas peliculas y series que tenemos para ti'
+            },
+            //token: tokens
+        }
+        admin.messaging().sendToDevice(tokens, payload)
+            .then(response => {
+                console.log('Notificaciones enviadas correctamente:', response);
+                res.status(200).json({ message: 'Notificaciones enviadas correctamente.' });
+            })
+            .catch(error => {
+                console.error('Error al enviar notificaciones:', error);
+                res.status(500).json({ error: 'Error al enviar notificaciones.' });
+            }); */
+    });
 }

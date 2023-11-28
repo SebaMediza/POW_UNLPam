@@ -229,8 +229,6 @@ app.get("/solologueado", auth,(req, res) => {
   res.json({ message: "Hola soy la api de node" });
 });
 
-
-
 //ruta para cerrar sesion. Antes de poder cerrar sesion chequea si tiene token es decir si esta logeado.
 app.get("/cerrarSesion",auth,(req, res)=>{
   if (res && res.statusCode === 200) {
@@ -240,9 +238,17 @@ app.get("/cerrarSesion",auth,(req, res)=>{
   }
 });
 
+//ruta para el envio de notificaciones
+app.post('/notificaciones', usuarios.enviarNotificacion);
+
+
+
 
 // set port, listen for requests
 const PORT = process.env.PORT || 7071;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
+
+
+
