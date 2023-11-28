@@ -1,19 +1,21 @@
 const sql = require("../db/db.js");
+const moment = require('moment');
 
 const Pelicula = function (pelicula) {
     this.titulo = pelicula.titulo,
-    this.descripcion = pelicula.descripcion,
-    this.fecha_lanzamiento = pelicula.fecha_lanzamiento,
-    this.duracion = pelicula.duracion,
-    this.productor = pelicula.productor,
-    this.director = pelicula.director,
-    this.genero = pelicula.genero,
-    this.urlPelicula = pelicula.urlPelicula,
-    this.banner = pelicula.banner,
-    this.imagen = pelicula.image
+        this.descripcion = pelicula.descripcion,
+        this.fecha_lanzamiento = pelicula.fecha_lanzamiento,
+        this.duracion = pelicula.duracion,
+        this.producer = pelicula.producer,
+        this.director = pelicula.director,
+        this.genero = pelicula.genero,
+        this.urlPelicula = pelicula.urlPelicula,
+        this.banner = pelicula.banner,
+        this.imagen = pelicula.image
 };
 
 Pelicula.create = (newPelicula, result) => {
+    console.log(newPelicula);
     sql.query("INSERT INTO pelicula SET ?", newPelicula, (err, res) => {
         if (err) {
             console.log("error: ", err);
@@ -43,7 +45,9 @@ Pelicula.findById = (id, result) => {
 
 Pelicula.getAll = (result) => {
     console.log("llega al modelo");
-    let query = "SELECT * FROM pelicula";
+    const  currentDate = moment().format('YYYY-MM-DD');
+
+    let query = `SELECT * FROM pelicula WHERE fecha_lanzamiento < '${currentDate}'`;
     sql.query(query, (err, res) => {
         if (err) {
             console.log("error: ", err);
@@ -121,16 +125,16 @@ Pelicula.removeAll = result => {
 
 }
 
-Pelicula.searchByGender = (genero, res) =>{
+Pelicula.searchByGender = (genero, res) => {
     if (genero.trim() !== "") {
-        
-        sql.query(`SELECT * FROM pelicula WHERE lower(genero) like "%${genero}%"`, (err, data)=>{
+
+        sql.query(`SELECT * FROM pelicula WHERE lower(genero) like "%${genero}%"`, (err, data) => {
             if (err) {
                 console.log("error en la sql: " + err);
                 res(500, err);
                 return;
             }
-            
+
             if (data.length > 0) {
                 res(null, data);
             } else {
@@ -138,9 +142,47 @@ Pelicula.searchByGender = (genero, res) =>{
                 res(404, "No se encontraron películas para el género: " + genero);
             }
         });
-    }else{
+    } else {
         res(404, "no se puede buscar por un genero vacio");
     }
+}
+
+Pelicula.proximamente = (res) => {
+    const currentDate = moment().format('YYYY-MM-DD')
+
+    sql.query(`SELECT * FROM pelicula WHERE fecha_lanzamiento > '${currentDate}'`, (err, data) => {
+        if (err) {
+            console.log("Error en la consulta SQL: " + err);
+            res(500, err);
+            return;
+        }
+
+        if (data.length > 0) {
+            res(null, data);
+        } else {
+            console.log("No se encontraron películas próximas.");
+            res(404, "No se encontraron películas próximas.");
+        }
+    })
+}
+
+Pelicula.pasadas = (res) => {
+    const currentDate = moment().format('YYYY-MM-DD')
+
+    sql.query(`SELECT * FROM pelicula WHERE fecha_lanzamiento <= '${currentDate}'`, (err, data) => {
+        if (err) {
+            console.log("Error en la consulta SQL: " + err);
+            res(500, err);
+            return;
+        }
+
+        if (data.length > 0) {
+            res(null, data);
+        } else {
+            console.log("No se encontraron películas próximas.");
+            res(404, "No se encontraron películas próximas.");
+        }
+    })
 }
 
 module.exports = Pelicula;

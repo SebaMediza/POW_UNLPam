@@ -109,6 +109,35 @@ app.delete("/peliculas", auth,(req, res)=>{
   }
 });
 
+//ruta para listar las proximas peliculas
+app.get("/proximamentePelicula",auth, (req, res) => {
+  if(res && res.statusCode === 200)
+    pelicula.proximamente(req, res);
+  else
+    console.log("error no es posible");
+})
+//ruta para listar las proximas series
+app.get("/peliculaPasadas",auth, (req, res) => {
+  if(res && res.statusCode === 200)
+    pelicula.pasadas(req, res);
+  else
+    console.log("error no es posible");
+})
+
+//ruta para listar las proximas series
+app.get("/proximamenteSerie",auth, (req, res) => {
+  if(res && res.statusCode === 200)
+    serie.proximamente(req, res);
+  else
+    console.log("error no es posible");
+})
+app.get("/seriePasadas",auth, (req, res) => {
+  if(res && res.statusCode === 200)
+    serie.pasadas(req, res);
+  else
+    console.log("error no es posible");
+})
+
 //Todo lo referido a series
 app.post("/series", auth,(req, res)=>{
   if (res && res.statusCode === 200) {
