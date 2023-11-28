@@ -7,7 +7,7 @@ import HomeScreen from "../screens/HomeScreen";
 import EventScreen from "../screens/EventScreen";
 import NextEventsScreen from "../screens/NextEventsScreen";
 import PastEventsScreen from "../screens/PastEventsScreen";
-import LoginScreen from "../screens/LoginScreen";
+import BananaTV from "../screens/BananaTV";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -60,7 +60,7 @@ function Navigation () {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="LoginScreen" component={LoginScreen}></Stack.Screen>
+        <Stack.Screen name="BananaTV" component={BananaTV}></Stack.Screen>
         <Stack.Screen
           name="HomeTabNavigator"
           component={HomeTabNavigator}

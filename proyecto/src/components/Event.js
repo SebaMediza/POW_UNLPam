@@ -10,7 +10,6 @@ function Event(data,{navigation},horizontal){
             showsHorizontalScrollIndicator={false}
             renderItem={({ item }) => (     
                 <View style={{ margin: 10, padding: 50, backgroundColor: 'lightgray' }}>
-                    {console.log(item.banner)}
                     <Text>{item.titulo}</Text>
                     <Image
                         scr={item.banner}

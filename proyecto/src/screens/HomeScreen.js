@@ -1,42 +1,32 @@
 import { Button, Text, View, StyleSheet, ScrollView } from "react-native";
 import React, { useEffect, useState } from 'react';
 import Event from "../components/Event";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function HomeScreen({ navigation }) {
   const [peliculas, setPeliculas] = useState(null);
 
   useEffect(() => {
-    // Función asincrónica para realizar la solicitud
     const fetchData = async () => {
       try {
-        // Hacer la solicitud usando fetch
         const response = await fetch('http://localhost:7071/peliculas', {
           headers: {
             'Content-Type': 'application/json',
-            'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJibGFzIiwiaWF0IjoxNzAwNjc3NjY4fQ.iUrd1YhX5F0BILCPmNaIFteREZndbmSDpAuuoY5af-Y'
+            'x-access-token': await AsyncStorage.getItem('x-access-token'),
           }
         });
-
-        // Verificar si la respuesta es exitosa (código de estado 200)
         if (response.ok) {
-          // Parsear la respuesta como JSON
           const result = await response.json();
-
-          // Actualizar el estado con los datos recibidos
           setPeliculas(result);
         } else {
-          // Manejar errores en la respuesta
           console.error('Error en la solicitud:', response.statusText);
         }
       } catch (error) {
-        // Manejar errores de red u otros errores
         console.error('Error en la solicitud:', error.message);
       }
     };
-
-    // Llamar a la función de solicitud cuando el componente se monta
     fetchData();
-  }, []); // La dependencia vacía asegura que useEffect se ejecute solo una vez al montar el componente
+  }, []);
 
     return (
         <ScrollView style={styles.container}>
