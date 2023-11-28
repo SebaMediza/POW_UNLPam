@@ -71,17 +71,46 @@ function HomeScreen ({navigation}) {
     //fetchAllPastSerie();
   }, []);
 
+  const eventosProximosOrdenados = dataNextEvent.sort((a, b) => {
+    const fechaA = new Date(a.fecha_lanzamiento);
+    const fechaB = new Date(b.fecha_lanzamiento);
+
+    if (fechaA.getFullYear() !== fechaB.getFullYear()) {
+      return fechaA.getFullYear() - fechaB.getFullYear();
+    }
+
+    if (fechaA.getMonth() !== fechaB.getMonth()) {
+      return fechaA.getMonth() - fechaB.getMonth();
+    }
+
+    return fechaA.getDate() - fechaB.getDate();
+  });
+
+  const eventosPasadosOrdenados = dataPastEvent.sort((a, b) => {
+    const fechaA = new Date(a.date);
+    const fechaB = new Date(b.date);
+
+    if (fechaA.getFullYear() !== fechaB.getFullYear()) {
+      return fechaA.getFullYear() - fechaB.getFullYear();
+    }
+
+    if (fechaA.getMonth() !== fechaB.getMonth()) {
+      return fechaA.getMonth() - fechaB.getMonth();
+    }
+
+    return fechaA.getDate() - fechaB.getDate();
+  });
 
   return (
       <ScrollView style={styles.container}>
           <View style={styles.section}>
               <Text style={styles.sectionTitle}>Next Events</Text>
-              {Event(dataNextEvent,{navigation},true,5)}
+              {Event(eventosProximosOrdenados,{navigation},true,5)}
               <Button title="More Next Events" color={"black"} onPress={() => navigation.navigate('Next Events')}></Button>                   
           </View>
           <View style={styles.section}>
               <Text style={styles.sectionTitle}>Past Events</Text>
-              {Event(dataPastEvent,{navigation},true,5)}
+              {Event(eventosPasadosOrdenados,{navigation},true,5)}
               <Button title="More Past Events" color={"black"} onPress={() => navigation.navigate('Past Events')}></Button>
           </View>
       </ScrollView>

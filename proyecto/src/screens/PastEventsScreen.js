@@ -42,8 +42,8 @@ function PastEventsScreen({navigation}){
   
   // Ordenar los eventos del más viejo al más nuevo por año, mes y día
   const eventosOrdenados = dataEvent.sort((a, b) => {
-    const fechaA = new Date(a.date);
-    const fechaB = new Date(b.date);
+    const fechaA = new Date(a.fecha_lanzamiento);
+    const fechaB = new Date(b.fecha_lanzamiento);
 
     if (fechaA.getFullYear() !== fechaB.getFullYear()) {
       return fechaA.getFullYear() - fechaB.getFullYear();
