@@ -2,7 +2,7 @@ import React, { useEffect, useState} from 'react';
 import { View, Text, TextInput, Button, FlatList, Image } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 
-const urlApi = 'http://localhost:7071';
+const urlApi = 'http://192.168.1.38:7071';
 
 function EventScreen (){
   const route = useRoute();

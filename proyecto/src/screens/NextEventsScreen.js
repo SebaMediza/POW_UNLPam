@@ -2,7 +2,7 @@ import React, { useEffect, useState }  from "react";
 import { View } from 'react-native';
 import Event from "../components/Event";
 
-const urlApi = 'http://localhost:7071'
+const urlApi = 'http://192.168.1.38:7071'
 
 
 function NextEventsScreen({navigation}){

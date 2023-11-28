@@ -1,7 +1,7 @@
 import React from "react";
 import {View, FlatList, TouchableOpacity, Image, Text } from "react-native";
 
-function Event(data,{navigation},horizontal){
+function Event(data,{navigation},horizontal, limit ){
 
   const handleImagePress = (idMovie) => {
       navigation.navigate('DetailStackScreen', {
@@ -10,38 +10,40 @@ function Event(data,{navigation},horizontal){
       });
   };
   
-    return (
-      <FlatList
-        data={data}
-        keyExtractor={(item) => item.titulo}
-        horizontal={horizontal} // Configura la lista como horizontal
-        showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => ( 
-          <View style={{ padding: 10 }}>
-            <Text>Título: {item.titulo}</Text>
-            
-            {/*item.idSerie != null && (
-              <Text>Serie{console.log('Aquí hay un idSerie')}</Text>
-            )*/}
-            
-            <Text>Fecha: {new Date(item.fecha_lanzamiento).toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}</Text>
-            <TouchableOpacity
-              onPress={() => handleImagePress(item.idMovie)}
-              style={{ padding: 10 }}
-            >
-              <Image
-                style={styles.img}
-                source={{ uri: item.imagen }}
-              />
-            </TouchableOpacity>
-          </View>  
-        )}
-      />
-    )
+  const limitedData = limit ? data.slice(0, limit) : data;
+
+  return (
+    <FlatList
+      data={limitedData}
+      keyExtractor={(item) => item.titulo}
+      horizontal={horizontal} // Configura la lista como horizontal
+      showsHorizontalScrollIndicator={false}
+      renderItem={({ item }) => ( 
+        <View style={{ padding: 10 }}>
+          <Text>Título: {item.titulo}</Text>
+          
+          {/*item.idSerie != null && (
+            <Text>Serie{console.log('Aquí hay un idSerie')}</Text>
+          )*/}
+          
+          <Text>Fecha: {new Date(item.fecha_lanzamiento).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}</Text>
+          <TouchableOpacity
+            onPress={() => handleImagePress(item.idMovie)}
+            style={{ padding: 10 }}
+          >
+            <Image
+              style={styles.img}
+              source={{ uri: item.imagen }}
+            />
+          </TouchableOpacity>
+        </View>  
+      )}
+    />
+  )
 }
 
 export default Event;
