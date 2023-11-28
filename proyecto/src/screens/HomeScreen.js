@@ -2,6 +2,7 @@ import { Button, Text, View, StyleSheet, ScrollView } from "react-native";
 import React, { useEffect, useState } from 'react';
 import Event from "../components/Event";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {API} from '@env'
 
 function HomeScreen({ navigation }) {
   const [peliculas, setPeliculas] = useState(null);
@@ -9,7 +10,7 @@ function HomeScreen({ navigation }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:7071/peliculas', {
+        const response = await fetch(`${API}/peliculas`, {
           headers: {
             'Content-Type': 'application/json',
             'x-access-token': await AsyncStorage.getItem('x-access-token'),

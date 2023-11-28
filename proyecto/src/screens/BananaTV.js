@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {API} from '@env'
 
 const BananaTV = ({ navigation }) => {
   const [nombre, setNombre] = useState('');
@@ -9,7 +10,7 @@ const BananaTV = ({ navigation }) => {
   const handleLogin = async () => {
     try {
       const usuario = { nombre, password };
-      const data = await fetch('http://localhost:7071/login', {
+      const data = await fetch(`${API}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
