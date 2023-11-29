@@ -12,7 +12,7 @@ function HomeScreen() {
   const [dataPastSerie, setDataPastSerie] = useState([]);
   const dataNextEvent = [...dataNextPelis, ...dataNextSerie];
   const dataPastEvent = [...dataPastPelis, ...dataPastSerie];
-  console.log("todos los pasados: "+ dataPastEvent);
+  
   
 
   const fetchAllNextPelis = async () => {
