@@ -215,7 +215,20 @@ app.get("/favorite",auth,(req, res)=>{
     console.log("error no es posible ir a la home dado que no ha iniciado sesion: "+  res.status);
   }
 });
-
+app.post("/newComentario",auth,(req, res)=>{
+  if (res && res.statusCode === 200) {
+    main.newComment(req, res) 
+  }else{
+    console.log("error no es posible ir a la home dado que no ha iniciado sesion: "+  res.status);
+  }
+});
+app.get("/verComentarios/:id",auth,(req, res)=>{
+  if (res && res.statusCode === 200) {
+    main.verComment(req, res) 
+  }else{
+    console.log("error no es posible ir a la home dado que no ha iniciado sesion: "+  res.status);
+  }
+});
 app.delete("/favorite/:id",auth,(req, res)=>{
   if (res && res.statusCode === 200) {
     favorite.delete(req, res) 
