@@ -21,11 +21,6 @@ function Event(data, { navigation }, horizontal, limit) {
       renderItem={({ item }) => (
         <View style={{ padding: 10 }}>
           <Text>Título: {item.titulo}</Text>
-
-          {/*item.idSerie != null && (
-            <Text>Serie{console.log('Aquí hay un idSerie')}</Text>
-          )*/}
-
           <Text>Fecha: {new Date(item.fecha_lanzamiento).toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',
@@ -33,13 +28,11 @@ function Event(data, { navigation }, horizontal, limit) {
           })}</Text>
           <TouchableOpacity
             onPress={() => handleImagePress(item.idMovie)}
-            style={{ padding: 10 }}
+            style={{ paddingTop: 5 }}
           >
             <Image
               style={styles.img}
               source={{ uri: item.banner }}
-              width={181}
-              height={271}
             />
           </TouchableOpacity>
         </View>
@@ -66,7 +59,7 @@ const styles = {
     marginBottom: 10,
   },
   img: {
-    width: 170,
-    height: 170
+    width: 181,
+    height: 271
   }
 };

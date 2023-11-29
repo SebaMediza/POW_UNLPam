@@ -57,7 +57,7 @@ function PastEventsScreen({ navigation }) {
   });
 
   return (
-    <View>
+    <View style={{backgroundColor: '#ffed8d', flex: 1}}>
       {Event(eventosOrdenados, { navigation }, false)}
     </View>
   );

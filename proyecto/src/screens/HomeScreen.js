@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Text, View, StyleSheet, ScrollView } from "react-native";
+import { Button, Text, View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import Event from "../components/Event";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { API } from '@env'
@@ -12,7 +12,6 @@ function HomeScreen({ navigation }) {
   //const [dataPastSerie, setDataPastSerie] = useState([]);
   const dataNextEvent = [...dataNextPelis/*, ...dataNextSerie*/];
   const dataPastEvent = [...dataPastPelis/*, ...dataPastSerie*/];
-  console.log("todos los pasados: " + dataPastEvent);
 
 
   const fetchAllNextPelis = async () => {
@@ -104,14 +103,18 @@ function HomeScreen({ navigation }) {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Next Events</Text>
+        <Text style={styles.sectionTitle}>Proximamente</Text>
         {Event(eventosProximosOrdenados, { navigation }, true, 5)}
-        <Button title="More Next Events" color={"black"} onPress={() => navigation.navigate('Next Events')}></Button>
+        <TouchableOpacity style={{ borderColor: 'black', borderWidth: 1, borderRadius: 10, margin: 5 }} onPress={() => navigation.navigate('Proximamente')}>
+          <Text style={{ fontSize: 16, margin: 5, borderRadius: 5, textAlign: 'center' }}>Mas a Estrenar</Text>
+        </TouchableOpacity>
       </View>
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Past Events</Text>
+        <Text style={styles.sectionTitle}>Estrenos</Text>
         {Event(eventosPasadosOrdenados, { navigation }, true, 5)}
-        <Button title="More Past Events" color={"black"} onPress={() => navigation.navigate('Past Events')}></Button>
+        <TouchableOpacity style={{ borderColor: 'black', borderWidth: 1, borderRadius: 10, margin: 5 }} onPress={() => navigation.navigate('Estrenos')}>
+          <Text style={{ fontSize: 16, margin: 5, borderRadius: 5, textAlign: 'center' }}>Mas Estrenos</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
@@ -121,14 +124,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+    backgroundColor: '#FFED8D'
   },
   section: {
     marginBottom: 20,
+    flex: 1,
+    backgroundColor: '#fbd52c',
+    borderRadius: 10,
+    borderColor: 'black',
+    borderWidth: 1,
   },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: 'bold',
     marginBottom: 10,
+    textAlign: 'center',
   },
 });
 

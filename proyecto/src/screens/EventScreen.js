@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, Button, FlatList, Image, SafeAreaView } from 'react-native';
+import { View, Text, TextInput, Button, FlatList, Image, SafeAreaView, Touchable, TouchableOpacity } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { API } from '@env'
@@ -7,7 +7,6 @@ import { API } from '@env'
 function EventScreen() {
   const route = useRoute();
   const { idMovie } = route.params;
-  console.log("idPeli: " + idMovie);
 
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
@@ -46,9 +45,12 @@ function EventScreen() {
           style={{ width: '%40', height: 200, margin: 5 }}
         />
         <Text style={{ fontSize: 16, margin: 5, borderRadius: 5 }}>{data.descripcion}</Text>
+        <TouchableOpacity style={{ borderColor: 'black', borderWidth: 1, borderRadius: 10, margin: 5 }}>
+          <Text style={{ fontSize: 16, margin: 5, borderRadius: 5, backgroundColor: '#fbd52c', textAlign: 'center' }}>Reproducir</Text>
+        </TouchableOpacity>
       </View>
-      <View style={{flex: 1}}>
-        <Text style={{ fontSize: 18, marginTop: 20, marginBottom: 10 }}>Comentarios</Text>
+      <View style={{ flex: 1, borderColor: 'black', borderWidth: 1, borderRadius: 10, margin: 5 }}>
+        <Text style={{ fontSize: 18, marginTop: 20, marginBottom: 10, textAlign: 'center' }}>Comentarios</Text>
         <FlatList
           data={comments}
           keyExtractor={(item, index) => index.toString()}
@@ -58,9 +60,11 @@ function EventScreen() {
           placeholder="Añadir comentario"
           value={comment}
           onChangeText={(text) => setComment(text)}
-          style={{ borderWidth: 1, padding: 10, marginVertical: 10 }}
+          style={{ borderWidth: 1, padding: 10, margin: 10, backgroundColor: '#fbd52c' }}
         />
-        <Button title="Comentar" onPress={handleComment} />
+        <TouchableOpacity style={{ borderColor: 'black', borderWidth: 1, borderRadius: 10, margin: 5 }} onPress={handleComment}>
+          <Text style={{ fontSize: 16, margin: 5, borderRadius: 5, textAlign: 'center' }}>Comentar</Text>
+        </TouchableOpacity>
       </View>
 
     </SafeAreaView>
