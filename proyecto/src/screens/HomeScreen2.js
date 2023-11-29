@@ -1,6 +1,6 @@
 import { Button, Text, View, StyleSheet, ScrollView } from "react-native";
 import React, { useEffect, useState } from 'react';
-import Event from "../components/Event";
+import Event from "../components/Event2";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {API} from '@env'
 
