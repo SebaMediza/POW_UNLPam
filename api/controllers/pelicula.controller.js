@@ -13,9 +13,11 @@ exports.create = (req, res) => {
         descripcion: req.body.descripcion,
         fecha_lanzamiento: req.body.fecha_lanzamiento,
         duracion: req.body.duracion,
+        producer: req.body.producer,
         director: req.body.director,
         genero: req.body.genero,
         urlPelicula: req.body.urlPelicula,
+        banner: req.body.banner,
         image: req.body.image
     });
     Pelicula.create(pelicula, (err, data) => {
@@ -127,3 +129,35 @@ exports.searchByGender = (req, res) =>{
         }
     })
 }
+
+exports.proximamente  = (req, res) => {
+    Pelicula.proximamente((err, data) => {
+        if (err) {
+            res.status(500).send({
+                message:
+                    err.message || "error no hay peliculas proximas"
+            })
+        }  
+        try {
+            res.send(data);
+        } catch (error) {
+            console.log("error: " + error);
+        }
+    });
+};
+
+exports.pasadas  = (req, res) => {
+    Pelicula.pasadas((err, data) => {
+        if (err) {
+            res.status(500).send({
+                message:
+                    err.message || "error no hay peliculas proximas"
+            })
+        }  
+        try {
+            res.send(data);
+        } catch (error) {
+            console.log("error: " + error);
+        }
+    });
+};

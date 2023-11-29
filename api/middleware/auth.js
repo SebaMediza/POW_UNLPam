@@ -5,7 +5,7 @@ const {KEY_APP} = process.env;
 //trae el token de la bd
 const verifyToken = (req, res, next) =>{
     //x-access-token esta en el Thunder Client en el Header
-    console.log("llega al middleware");
+    
     const token = req.headers["x-access-token"];
     if(!token){
         return res.status(403).send("falta token");

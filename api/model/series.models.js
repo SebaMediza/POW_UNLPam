@@ -1,10 +1,12 @@
 const sql = require("../db/db.js");
+const moment = require('moment');
 
 const Serie = function (serie) {
     this.titulo = serie.titulo,
     this.descripcion = serie.descripcion,
     this.fecha_lanzamiento = serie.fecha_lanzamiento,
     this.temporadas = serie.temporadas,
+    this.producer = serie.producer,
     this.director = serie.director,
     this.genero = serie.genero,
     this.urlSerie = serie.urlSerie,
@@ -41,7 +43,8 @@ Serie.findById = (id, result) => {
 };
 
 Serie.getAll = (result) => {
-    let query = "SELECT * FROM serie";
+    const currentDate = moment().format('YYYY-MM-DD');
+    let query = `SELECT * FROM serie WHERE fecha_lanzamiento < ${currentDate}`;
     sql.query(query, (err, res) => {
         if (err) {
             console.log("error: ", err);
@@ -140,6 +143,44 @@ Serie.searchByGender = (genero, res) =>{
     }else{
         res(404, "no se puede buscar por un genero vacio");
     }
+}
+
+Serie.proximamente = (res) => {
+    const currentDate = moment().format('YYYY-MM-DD')
+
+    sql.query(`SELECT * FROM serie WHERE fecha_lanzamiento > '${currentDate}'`, (err, data) => {
+        if (err) {
+            console.log("Error en la consulta SQL: " + err);
+            res(500, err);
+            return;
+        }
+
+        if (data.length > 0) {
+            res(null, data);
+        } else {
+            console.log("No se encontraron series próximas.");
+            res(404, "No se encontraron series próximas.");
+        }
+    })
+}
+
+Serie.pasadas = (res) => {
+    const currentDate = moment().format('YYYY-MM-DD')
+
+    sql.query(`SELECT * FROM serie WHERE fecha_lanzamiento <= '${currentDate}'`, (err, data) => {
+        if (err) {
+            console.log("Error en la consulta SQL: " + err);
+            res(500, err);
+            return;
+        }
+
+        if (data.length > 0) {
+            res(null, data);
+        } else {
+            console.log("No se encontraron series próximas.");
+            res(404, "No se encontraron series próximas.");
+        }
+    })
 }
 
 module.exports = Serie;
