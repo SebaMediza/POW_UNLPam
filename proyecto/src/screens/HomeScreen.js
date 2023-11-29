@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Button, Text, View, StyleSheet, ScrollView} from "react-native";
+import { Button, Text, View, StyleSheet, ScrollView } from "react-native";
 import Event from "../components/Event";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { API } from '@env'
 
-const urlApi = 'http://192.168.1.38:7071'
-
-function HomeScreen ({navigation}) {
+function HomeScreen({ navigation }) {
 
   const [dataNextPelis, setDataNextPelis] = useState([]);
   //const [dataNextSerie, setDataNextSerie] = useState([]);
@@ -12,15 +12,15 @@ function HomeScreen ({navigation}) {
   //const [dataPastSerie, setDataPastSerie] = useState([]);
   const dataNextEvent = [...dataNextPelis/*, ...dataNextSerie*/];
   const dataPastEvent = [...dataPastPelis/*, ...dataPastSerie*/];
-  console.log("todos los pasados: "+ dataPastEvent);
-  
+  console.log("todos los pasados: " + dataPastEvent);
+
 
   const fetchAllNextPelis = async () => {
-    const response = await fetch(urlApi + '/proximamentePelicula', {
+    const response = await fetch(`${API}/proximamentePelicula`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJibGFzIiwiaWF0IjoxNzAwNjc3NjY4fQ.iUrd1YhX5F0BILCPmNaIFteREZndbmSDpAuuoY5af-Y'
+        'x-access-token': await AsyncStorage.getItem('x-access-token'),
       }
     })
     const res = await response.json();
@@ -28,11 +28,11 @@ function HomeScreen ({navigation}) {
   };
 
   /*const fetchAllNextSerie = async () => {
-    const response = await fetch(urlApi + '/proximamenteSerie', {
+    const response = await fetch(`${API}/proximamenteSerie`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJibGFzIiwiaWF0IjoxNzAwNjc3NjY4fQ.iUrd1YhX5F0BILCPmNaIFteREZndbmSDpAuuoY5af-Y'
+        'x-access-token': await AsyncStorage.getItem('x-access-token'),
       }
     })
     const res = await response.json();
@@ -40,11 +40,11 @@ function HomeScreen ({navigation}) {
   };*/
 
   const fetchAllPastPelis = async () => {
-    const response = await fetch(urlApi + '/peliculaPasadas', {
+    const response = await fetch(`${API}/peliculaPasadas`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJibGFzIiwiaWF0IjoxNzAwNjc3NjY4fQ.iUrd1YhX5F0BILCPmNaIFteREZndbmSDpAuuoY5af-Y'
+        'x-access-token': await AsyncStorage.getItem('x-access-token'),
       }
     })
     const res = await response.json();
@@ -52,11 +52,11 @@ function HomeScreen ({navigation}) {
   };
 
   /*const fetchAllPastSerie = async () => {
-    const response = await fetch(urlApi + '/seriePasadas', {
+    const response = await fetch(`${API}/seriePasadas`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJibGFzIiwiaWF0IjoxNzAwNjc3NjY4fQ.iUrd1YhX5F0BILCPmNaIFteREZndbmSDpAuuoY5af-Y'
+        'x-access-token': await AsyncStorage.getItem('x-access-token'),
       }
     })
     const res = await response.json();
@@ -102,18 +102,18 @@ function HomeScreen ({navigation}) {
   });
 
   return (
-      <ScrollView style={styles.container}>
-          <View style={styles.section}>
-              <Text style={styles.sectionTitle}>Next Events</Text>
-              {Event(eventosProximosOrdenados,{navigation},true,5)}
-              <Button title="More Next Events" color={"black"} onPress={() => navigation.navigate('Next Events')}></Button>                   
-          </View>
-          <View style={styles.section}>
-              <Text style={styles.sectionTitle}>Past Events</Text>
-              {Event(eventosPasadosOrdenados,{navigation},true,5)}
-              <Button title="More Past Events" color={"black"} onPress={() => navigation.navigate('Past Events')}></Button>
-          </View>
-      </ScrollView>
+    <ScrollView style={styles.container}>
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Next Events</Text>
+        {Event(eventosProximosOrdenados, { navigation }, true, 5)}
+        <Button title="More Next Events" color={"black"} onPress={() => navigation.navigate('Next Events')}></Button>
+      </View>
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Past Events</Text>
+        {Event(eventosPasadosOrdenados, { navigation }, true, 5)}
+        <Button title="More Past Events" color={"black"} onPress={() => navigation.navigate('Past Events')}></Button>
+      </View>
+    </ScrollView>
   );
 }
 

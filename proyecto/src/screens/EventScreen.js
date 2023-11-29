@@ -1,10 +1,10 @@
-import React, { useEffect, useState} from 'react';
-import { View, Text, TextInput, Button, FlatList, Image } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TextInput, Button, FlatList, Image, SafeAreaView } from 'react-native';
 import { useRoute } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { API } from '@env'
 
-const urlApi = 'http://192.168.1.38:7071';
-
-function EventScreen (){
+function EventScreen() {
   const route = useRoute();
   const { idMovie } = route.params;
   console.log("idPeli: " + idMovie);
@@ -22,11 +22,11 @@ function EventScreen (){
   };
 
   const fetchPeli = async () => {
-    const response = await fetch(urlApi + '/peliculas/' + idMovie, {
+    const response = await fetch(`${API}/peliculas/${idMovie}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJibGFzIiwiaWF0IjoxNzAwNjc3NjY4fQ.iUrd1YhX5F0BILCPmNaIFteREZndbmSDpAuuoY5af-Y'
+        'x-access-token': await AsyncStorage.getItem('x-access-token'),
       }
     })
     const res = await response.json();
@@ -38,29 +38,32 @@ function EventScreen (){
   }, []);
 
   return (
-    <View>
-      <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{data.titulo}</Text>
-      <Image
-        source={{uri: data.imagen}}
-        style={{ width: '%100', height: 200 }}
-      />
-      <Text style={{ fontSize: 16, marginTop: 10 }}>{data.descripcion}</Text>
-      
-      <Text style={{ fontSize: 18, marginTop: 20, marginBottom: 10 }}>Comentarios</Text>
-      <FlatList
-        data={comments}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => <Text>{item.descripcion}</Text>}
-      />
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#FFED8D' }}>
+      <View style={{ backgroundColor: '#fbd52c', flex: 1, borderColor: 'black', borderWidth: 1, borderRadius: 10, margin: 5 }}>
+        <Text style={{ fontSize: 20, fontWeight: 'bold', textAlign: 'center' }}>{data.titulo}</Text>
+        <Image
+          source={{ uri: data.imagen }}
+          style={{ width: '%40', height: 200, margin: 5 }}
+        />
+        <Text style={{ fontSize: 16, margin: 5, borderRadius: 5 }}>{data.descripcion}</Text>
+      </View>
+      <View style={{flex: 1}}>
+        <Text style={{ fontSize: 18, marginTop: 20, marginBottom: 10 }}>Comentarios</Text>
+        <FlatList
+          data={comments}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => <Text>{item.descripcion}</Text>}
+        />
+        <TextInput
+          placeholder="Añadir comentario"
+          value={comment}
+          onChangeText={(text) => setComment(text)}
+          style={{ borderWidth: 1, padding: 10, marginVertical: 10 }}
+        />
+        <Button title="Comentar" onPress={handleComment} />
+      </View>
 
-      <TextInput
-        placeholder="Añadir comentario"
-        value={comment}
-        onChangeText={(text) => setComment(text)}
-        style={{ borderWidth: 1, padding: 10, marginVertical: 10 }}
-      />
-      <Button title="Comentar" onPress={handleComment} />
-    </View>
+    </SafeAreaView>
   );
 };
 

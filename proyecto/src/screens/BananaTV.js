@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {API} from '@env'
+import { API } from '@env'
 
 const BananaTV = ({ navigation }) => {
   const [nombre, setNombre] = useState('');
@@ -31,30 +31,30 @@ const BananaTV = ({ navigation }) => {
 
   return (
     <View style={styles.container} >
-    <View style={styles.formcontainer}>
-      <Image
-        scr={'./assets/icon.jpg'}
-        width={200}
-        height={200}
-      />
-      <Text style={styles.title}>Iniciar Sesión</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Nombre"
-        onChangeText={(text) => setNombre(text)}
-        value={nombre}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Contraseña"
-        onChangeText={(text) => setPassword(text)}
-        value={password}
-        secureTextEntry
-      />
-      <TouchableOpacity style={styles.boton} onPress={handleLogin}>
-        <Text style={styles.text}>Iniciar Sesión</Text>
-      </TouchableOpacity>
-    </View>
+      <View style={styles.formcontainer}>
+        <Image
+          scr={'./assets/icon2.png'}
+          width={200}
+          height={200}
+        />
+        <Text style={styles.title}>Iniciar Sesión</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Nombre"
+          onChangeText={(text) => setNombre(text)}
+          value={nombre}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Contraseña"
+          onChangeText={(text) => setPassword(text)}
+          value={password}
+          secureTextEntry
+        />
+        <TouchableOpacity style={styles.boton} onPress={handleLogin}>
+          <Text style={styles.text}>Iniciar Sesión</Text>
+        </TouchableOpacity>
+      </View>
     </View>
 
   );
