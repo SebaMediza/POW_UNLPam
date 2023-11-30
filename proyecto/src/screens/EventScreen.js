@@ -14,7 +14,7 @@ function EventScren() {
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
   const [hayComentarios, setHayComentarios] = useState(false)
-  const [data, setData] = useState([]);
+  //const [data, setData] = useState([]);
 
   const handleComment = () => {
     const idContenido = idMovie;
@@ -74,18 +74,17 @@ function EventScren() {
 
   useEffect(() => {
     verComentarios(idMovie);
-    fetchPeli(idMovie);
   }, []);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#FFED8D' }}>
       <View style={{ backgroundColor: '#fbd52c', flex: 1, borderColor: 'black', borderWidth: 1, borderRadius: 10, margin: 5, padding: 5 }}>
-        <Text style={{ fontSize: 20, fontWeight: 'bold', textAlign: 'center' }}>{data.titulo}</Text>
+        <Text style={{ fontSize: 20, fontWeight: 'bold', textAlign: 'center' }}>{titulo}</Text>
         <Image
-          source={{ uri: data.imagen }}
+          source={{ uri: imagen }}
           style={{ width: '100%', height: 200 }}
         />
-        <Text style={{ fontSize: 16, marginTop: 10 }}>{data.descripcion}</Text>
+        <Text style={{ fontSize: 16, marginTop: 10 }}>{descripcion}</Text>
       </View>
       <View style={{ flex: 1, borderColor: 'black', borderWidth: 1, borderRadius: 10, margin: 5, padding: 5 }}>
         <Text style={{ fontSize: 18, marginTop: 20, margin: 10 }}>Comentarios</Text>

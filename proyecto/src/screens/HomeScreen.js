@@ -97,7 +97,7 @@ function HomeScreen() {
           renderItem={({ item }) => (
             <View style={{ padding: 5 }}>
               <TouchableOpacity
-                onPress={() => handleImagePress(item.idMovie, item.titulo, item.descripcion, item.banner)}
+                onPress={() => handleImagePress(item.idMovie, item.titulo, item.descripcion, item.imagen)}
                 style={{ padding: 5 }}
               >
                 <Image
