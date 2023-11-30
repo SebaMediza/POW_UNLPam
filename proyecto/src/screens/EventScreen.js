@@ -10,24 +10,26 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 function EventScren() {
   const route = useRoute();
   const { idMovie, titulo, descripcion, imagen} = route.params;
-
+  console.log("comentario en handle comment " + idMovie);
+  
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
   const [hayComentarios, setHayComentarios] = useState(false)
   //const [data, setData] = useState([]);
 
   const handleComment = () => {
+    
     const idContenido = idMovie;
     const comentario = comment;
     const comm = { idContenido, comentario };
     createComment(comm);
     if (comments) {
       setHayComentarios(true);
-      // setComments([...comments, { comentario: comment }])
     }
   };
 
   const createComment = async (comm) => {
+    console.log("nuevo comentario: " +comm.idContenido)
     await fetch(`${API}/newComentario`, {
       method: 'POST',
       headers: {

@@ -64,6 +64,13 @@ function PastEventsScreen({ navigation }) {
     return acc;
   }, {});
 
+  const handleEventPress = (idMovie, titulo, descripcion, imagen) => {
+    navigation.navigate('DetailStackScreen', {
+      screen: 'Detail Event',
+      params: { idMovie: idMovie, titulo : titulo, descripcion: descripcion, imagen: imagen },
+    });
+  };
+
   return (
     <View style={{ backgroundColor: '#ffed8d', flex: 1 }}>
       <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 10 }}>Estrenos</Text>
@@ -78,7 +85,7 @@ function PastEventsScreen({ navigation }) {
               renderItem={({ item: evento }) => (
                 <View style={{ borderWidth: 1, borderColor: 'black', borderRadius: 10, margin: 5, padding: 5 }}>
                   <TouchableOpacity
-                    onPress={() => navigation.navigate('DetailStackScreen', { eventoId: evento.id })}
+                    onPress={() => handleEventPress(evento.idMovie, evento.titulo, evento.descripcion, evento.imagen)}
                     style={{ marginBottom: 10 }}
                   >
                     <Text style={{ fontSize: 18, fontWeight: 'bold', marginBottom: 5 }}>{evento.titulo}</Text>
