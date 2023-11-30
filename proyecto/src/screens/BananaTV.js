@@ -28,6 +28,10 @@ const BananaTV = ({ navigation }) => {
       console.log('Error en la Solicitud: ', error)
     }
   };
+  const handleRegistroLinkPress = () => {
+    // Navegar hacia la pantalla de registro
+    navigation.navigate('RegisterScreen');
+  };
 
   return (
     <View style={styles.container} >
@@ -53,6 +57,10 @@ const BananaTV = ({ navigation }) => {
         />
         <TouchableOpacity style={styles.boton} onPress={handleLogin}>
           <Text style={styles.text}>Iniciar Sesión</Text>
+        </TouchableOpacity>
+        <br />
+        <TouchableOpacity onPress={handleRegistroLinkPress}>
+          <Text style={styles.registroLink}>¿No tienes una cuenta? Regístrate aquí.</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -92,6 +100,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#FBD52C', // Cambia el color de fondo aquí
     padding: 10,
     borderRadius: 5,
+    borderColor: 'black',
+    borderWidth: 1,
   },
   text: {
     color: '#000', // Cambia el color del texto aquí
