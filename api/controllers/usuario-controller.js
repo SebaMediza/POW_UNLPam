@@ -1,10 +1,11 @@
 const User = require("../model/usuario-model.js");
 const Tarjeta = require("../model/tarjeta-model.js");
 
-
-const FCM = require("fcm-node");
-const serverKey = require("../bananatv-46374-firebase-adminsdk-1o4cu-021962a036.json")
-const fcm = new FCM(serverKey);
+var admin = require("firebase-admin");
+var FCM = require("fcm-node");
+var serviceAccount = require("../bananatv-46374-firebase-adminsdk-1o4cu-021962a036.json")
+const centerPath = admin.credential.cert(serviceAccount);
+var fcm = new FCM(centerPath);
 
 
 exports.registro = (req, res) => {
