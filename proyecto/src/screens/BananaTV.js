@@ -58,7 +58,6 @@ const BananaTV = ({ navigation }) => {
         <TouchableOpacity style={styles.boton} onPress={handleLogin}>
           <Text style={styles.text}>Iniciar Sesión</Text>
         </TouchableOpacity>
-        <br />
         <TouchableOpacity onPress={handleRegistroLinkPress}>
           <Text style={styles.registroLink}>¿No tienes una cuenta? Regístrate aquí.</Text>
         </TouchableOpacity>

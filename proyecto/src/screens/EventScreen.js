@@ -82,7 +82,7 @@ function EventScren() {
       <View style={{ backgroundColor: '#fbd52c', flex: 1, borderColor: 'black', borderWidth: 1, borderRadius: 10, margin: 5, padding: 5 }}>
         <Text style={{ fontSize: 20, fontWeight: 'bold', textAlign: 'center' }}>{data.titulo}</Text>
         <Image
-          source={data.imagen}
+          source={{ uri: data.imagen }}
           style={{ width: '100%', height: 200 }}
         />
         <Text style={{ fontSize: 16, marginTop: 10 }}>{data.descripcion}</Text>
@@ -98,7 +98,6 @@ function EventScren() {
         <TouchableOpacity style={{ borderColor: 'black', borderWidth: 1, borderRadius: 10, margin: 5, backgroundColor: '#fbd52c' }} onPress={handleComment}>
           <Text style={{ fontSize: 16, margin: 5, borderRadius: 5, textAlign: 'center' }}>Comentar</Text>
         </TouchableOpacity>
-        <br />
         <View style={styles.line} />
         {hayComentarios ? (
           <FlatList
