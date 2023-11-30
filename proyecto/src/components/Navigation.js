@@ -8,7 +8,6 @@ import EventScreen from "../screens/EventScreen";
 import NextEventsScreen from "../screens/NextEventsScreen";
 import PastEventsScreen from "../screens/PastEventsScreen";
 import BananaTV from "../screens/BananaTV";
-import RegisterScreen from "../screens/RegisterScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -62,7 +61,6 @@ function Navigation () {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="BananaTV" component={BananaTV}></Stack.Screen>
-        <Stack.Screen name="RegisterScreen" component={RegisterScreen}></Stack.Screen>
         <Stack.Screen
           name="HomeTabNavigator"
           component={HomeTabNavigator}

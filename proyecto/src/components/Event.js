@@ -2,7 +2,6 @@ import React from "react";
 import { View, FlatList, TouchableOpacity, Image, Text } from "react-native";
 
 function Event(data, { navigation }, horizontal, limit) {
-
   const handleImagePress = (idMovie) => {
     navigation.navigate('DetailStackScreen', {
       screen: 'Detail Event',

@@ -5,13 +5,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { API } from '@env'
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+
+//pantalla para ver los detalles del contenido
 function EventScren() {
   const route = useRoute();
-  const { idMovie } = route.params;
+  const { idMovie, titulo, descripcion, imagen} = route.params;
 
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
-  const [data, setData] = useState([]);
   const [hayComentarios, setHayComentarios] = useState(false)
 
   const handleComment = () => {
@@ -35,7 +36,6 @@ function EventScren() {
       body: JSON.stringify(comm)
     }).then((response) => {
       if (response.ok) {
-        console.log("se cargo bien");
         setHayComentarios(true);
         verComentarios(idMovie);
       }
@@ -53,7 +53,6 @@ function EventScren() {
     const res = await response.json();
     if (res.length > 0) {
       setHayComentarios(true);
-      console.log("id: " + idMovie + " esta en : " + hayComentarios);
     } else {
       setHayComentarios(false);
     }
@@ -73,7 +72,6 @@ function EventScren() {
   };
 
   useEffect(() => {
-    fetchPeli();
     verComentarios(idMovie);
   }, []);
 

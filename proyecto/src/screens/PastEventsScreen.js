@@ -3,6 +3,7 @@ import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { API } from '@env'
 
+//screen para eventos pasados
 function PastEventsScreen({ navigation }) {
 
   const [dataPelis, setDataPelis] = useState([]);

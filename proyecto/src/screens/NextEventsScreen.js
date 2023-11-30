@@ -3,6 +3,8 @@ import { View, Text, FlatList, TouchableOpacity, AppRegistry } from 'react-nativ
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { API } from '@env'
 
+
+//screen para proximos eventos
 function NextEventsScreen({ navigation }) {
 
   const [dataPelis, setDataPelis] = useState([]);

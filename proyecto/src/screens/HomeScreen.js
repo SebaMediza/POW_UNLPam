@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { API } from '@env'
 
+//screen principal, hay 5 eventos proximos y 5 pasados 
 function HomeScreen() {
   const navigation = useNavigation();
 
@@ -13,7 +14,6 @@ function HomeScreen() {
   const [dataPastSerie, setDataPastSerie] = useState([]);
   const dataNextEvent = [...dataNextPelis, ...dataNextSerie];
   const dataPastEvent = [...dataPastPelis, ...dataPastSerie];
-
 
 
   const fetchAllNextPelis = async () => {
@@ -78,10 +78,10 @@ function HomeScreen() {
 
 
 
-  const handleImagePress = (idMovie) => {
+  const handleImagePress = (idMovie, titulo, descripcion, imagen) => {
     navigation.navigate('DetailStackScreen', {
       screen: 'Detail Event',
-      params: { idMovie: idMovie },
+      params: { idMovie: idMovie, titulo : titulo, descripcion: descripcion, imagen: imagen },
     });
   };
 
@@ -97,7 +97,7 @@ function HomeScreen() {
           renderItem={({ item }) => (
             <View style={{ padding: 5 }}>
               <TouchableOpacity
-                onPress={() => handleImagePress(item.idMovie)}
+                onPress={() => handleImagePress(item.idMovie, item.titulo, item.descripcion, item.banner)}
                 style={{ padding: 5 }}
               >
                 <Image
@@ -122,7 +122,7 @@ function HomeScreen() {
           renderItem={({ item }) => (
             <View style={{ padding: 5 }}>
               <TouchableOpacity
-                onPress={() => handleImagePress(item.idMovie)}
+                onPress={() => handleImagePress(item.idMovie, item.titulo, item.descripcion, item.imagen)}
                 style={{ padding: 5 }}
               >
                 <Image
