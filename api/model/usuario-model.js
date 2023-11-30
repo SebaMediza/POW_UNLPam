@@ -122,6 +122,15 @@ User.cerrarSesion = (idUser, res) => {
 
 }
 
+User.notification = (callback) => {
+  sql.query(`SELECT token FROM usuarios`, (err, result) => {
+    if(err){
+      return callback(err, null);
+    }
+    return callback(null, result)
+  })
+}
+
 
 
 

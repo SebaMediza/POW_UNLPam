@@ -116,6 +116,7 @@ app.get("/proximamentePelicula",auth, (req, res) => {
   else
     console.log("error no es posible");
 })
+<<<<<<< HEAD
 //ruta para listar las proximas series
 app.get("/peliculaPasadas",auth, (req, res) => {
   if(res && res.statusCode === 200)
@@ -123,6 +124,8 @@ app.get("/peliculaPasadas",auth, (req, res) => {
   else
     console.log("error no es posible");
 })
+=======
+>>>>>>> dev-fede
 
 //ruta para listar las proximas series
 app.get("/proximamenteSerie",auth, (req, res) => {
@@ -131,12 +134,15 @@ app.get("/proximamenteSerie",auth, (req, res) => {
   else
     console.log("error no es posible");
 })
+<<<<<<< HEAD
 app.get("/seriePasadas",auth, (req, res) => {
   if(res && res.statusCode === 200)
     serie.pasadas(req, res);
   else
     console.log("error no es posible");
 })
+=======
+>>>>>>> dev-fede
 
 //Todo lo referido a series
 app.post("/series", auth,(req, res)=>{
@@ -255,8 +261,6 @@ app.get("/solologueado", auth,(req, res) => {
   res.json({ message: "Hola soy la api de node" });
 });
 
-
-
 //ruta para cerrar sesion. Antes de poder cerrar sesion chequea si tiene token es decir si esta logeado.
 app.get("/cerrarSesion",auth,(req, res)=>{
   if (res && res.statusCode === 200) {
@@ -266,9 +270,17 @@ app.get("/cerrarSesion",auth,(req, res)=>{
   }
 });
 
+//ruta para el envio de notificaciones
+app.post('/notificaciones', usuarios.enviarNotificacion);
+
+
+
 
 // set port, listen for requests
 const PORT = process.env.PORT || 7071;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
+
+
+

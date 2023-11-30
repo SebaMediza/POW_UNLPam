@@ -8,7 +8,6 @@ function Event(data, { navigation }, horizontal, limit) {
       params: { idMovie: idMovie },
     });
   };
-
   const limitedData = limit ? data.slice(0, limit) : data;
 
   return (
