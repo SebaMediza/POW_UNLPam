@@ -102,7 +102,7 @@ function HomeScreen() {
               >
                 <Image
                   style={styles.img}
-                  source={{ uri: item.imagen }}
+                  source={{ uri: item.banner }}
                 />
               </TouchableOpacity>
             </View>
