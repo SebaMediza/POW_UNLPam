@@ -1,9 +1,9 @@
 const User = require("../model/usuario-model.js");
 const Tarjeta = require("../model/tarjeta-model.js");
 
-const {GOOGLE_APPLICATION_CREDENTIALS} = process.env
-const FCM = require('fcm-node');
-const serverKey = require(GOOGLE_APPLICATION_CREDENTIALS)
+
+const FCM = require("fcm-node");
+const serverKey = require("../bananatv-46374-firebase-adminsdk-1o4cu-021962a036.json")
 const fcm = new FCM(serverKey);
 
 
