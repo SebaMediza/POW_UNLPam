@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
 
 const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -13,6 +13,11 @@ const LoginScreen = ({navigation}) => {
     console.log('Password:', password);
     // Agrega tu lógica de autenticación aquí
     navigation.navigate('HomeTabNavigator')
+  };
+
+  const handleRegistroLinkPress = () => {
+    // Navegar hacia la pantalla de registro
+    navigation.navigate('RegisterScreen');
   };
 
   return (
@@ -32,6 +37,11 @@ const LoginScreen = ({navigation}) => {
         secureTextEntry
       />
       <Button title="Iniciar Sesión" onPress={handleLogin} />
+
+      {/* Agregar un enlace/botón para ir a la pantalla de registro */}
+      <TouchableOpacity onPress={handleRegistroLinkPress}>
+        <Text style={styles.registroLink}>¿No tienes una cuenta? Regístrate aquí.</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -54,6 +64,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 12,
     paddingLeft: 8,
+  },
+  registroLink: {
+    marginTop: 16,
+    color: 'blue',
+    textDecorationLine: 'underline',
   },
 });
 

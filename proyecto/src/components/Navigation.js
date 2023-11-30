@@ -8,6 +8,7 @@ import EventScreen from "../screens/EventScreen";
 import NextEventsScreen from "../screens/NextEventsScreen";
 import PastEventsScreen from "../screens/PastEventsScreen";
 import LoginScreen from "../screens/LoginScreen";
+import RegisterScreen from "../screens/RegisterScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -61,6 +62,7 @@ function Navigation () {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="LoginScreen" component={LoginScreen}></Stack.Screen>
+        <Stack.Screen name="RegisterScreen" component={RegisterScreen}></Stack.Screen>
         <Stack.Screen
           name="HomeTabNavigator"
           component={HomeTabNavigator}
