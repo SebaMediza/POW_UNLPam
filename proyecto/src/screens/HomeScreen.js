@@ -1,65 +1,70 @@
 import React, { useEffect, useState } from "react";
 import { TouchableOpacity, Button, Text, View, StyleSheet, FlatList, Image } from "react-native";
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { API } from '@env'
 
-const urlApi = 'http://localhost:7071'
+//screen principal, hay 5 eventos proximos y 5 pasados 
 function HomeScreen() {
   const navigation = useNavigation();
- 
+
   const [dataNextPelis, setDataNextPelis] = useState([]);
   const [dataNextSerie, setDataNextSerie] = useState([]);
   const [dataPastPelis, setDataPastPelis] = useState([]);
   const [dataPastSerie, setDataPastSerie] = useState([]);
   const dataNextEvent = [...dataNextPelis, ...dataNextSerie];
   const dataPastEvent = [...dataPastPelis, ...dataPastSerie];
-  
-  
+
 
   const fetchAllNextPelis = async () => {
-    const response = await fetch(urlApi + '/proximamentePelicula', {
+    const response = await fetch(`${API}/proximamentePelicula`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJibGFzIiwiaWF0IjoxNzAwNjc3NjY4fQ.iUrd1YhX5F0BILCPmNaIFteREZndbmSDpAuuoY5af-Y'
+        'x-access-token': await AsyncStorage.getItem('x-access-token'),
       }
     })
     const res = await response.json();
+    console.log(res);
     setDataNextPelis(res);
   };
 
   const fetchAllNextSerie = async () => {
-    const response = await fetch(urlApi + '/proximamenteSerie', {
+    const response = await fetch(`${API}/proximamenteSerie`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJibGFzIiwiaWF0IjoxNzAwNjc3NjY4fQ.iUrd1YhX5F0BILCPmNaIFteREZndbmSDpAuuoY5af-Y'
+        'x-access-token': await AsyncStorage.getItem('x-access-token'),
       }
     })
     const res = await response.json();
+    console.log(res);
     setDataNextSerie(res);
   };
 
   const fetchAllPastPelis = async () => {
-    const response = await fetch(urlApi + '/peliculaPasadas', {
+    const response = await fetch(`${API}/peliculaPasadas`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJibGFzIiwiaWF0IjoxNzAwNjc3NjY4fQ.iUrd1YhX5F0BILCPmNaIFteREZndbmSDpAuuoY5af-Y'
+        'x-access-token': await AsyncStorage.getItem('x-access-token'),
       }
     })
     const res = await response.json();
+    console.log(res);
     setDataPastPelis(res);
   };
 
   const fetchAllPastSerie = async () => {
-    const response = await fetch(urlApi + '/seriePasadas', {
+    const response = await fetch(`${API}/seriePasadas`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJibGFzIiwiaWF0IjoxNzAwNjc3NjY4fQ.iUrd1YhX5F0BILCPmNaIFteREZndbmSDpAuuoY5af-Y'
+        'x-access-token': await AsyncStorage.getItem('x-access-token'),
       }
     })
     const res = await response.json();
+    console.log(res);
     setDataPastSerie(res);
   };
 
@@ -73,27 +78,27 @@ function HomeScreen() {
 
 
 
-  const handleImagePress = (idMovie) => {
+  const handleImagePress = (idMovie, titulo, descripcion, imagen) => {
     navigation.navigate('DetailStackScreen', {
       screen: 'Detail Event',
-      params: { idMovie: idMovie },
+      params: { idMovie: idMovie, titulo : titulo, descripcion: descripcion, imagen: imagen },
     });
   };
- 
+
   return (
     <View style={styles.container}>
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Next Events</Text>
+        <Text style={styles.sectionTitle}>Proximamente</Text>
         <FlatList
-          data={dataNextEvent }
+          data={dataNextEvent}
           keyExtractor={(item) => item.titulo} // Asegúrate de convertir a cadena o número si es necesario
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
-            <View style={{ padding: 10 }}>
+            <View style={{ padding: 5 }}>
               <TouchableOpacity
-                onPress={() => handleImagePress(item.idMovie)}
-                style={{ padding: 10 }}
+                onPress={() => handleImagePress(item.idMovie, item.titulo, item.descripcion, item.banner)}
+                style={{ padding: 5 }}
               >
                 <Image
                   style={styles.img}
@@ -103,30 +108,34 @@ function HomeScreen() {
             </View>
           )}
         />
-        <Button title="More Next Events" color={"black"} onPress={() => navigation.navigate('Next Events')}></Button>
+        <TouchableOpacity style={{ borderColor: 'black', borderWidth: 1, borderRadius: 10, margin: 5 }} onPress={() => navigation.navigate('Proximamente')}>
+          <Text style={{ fontSize: 16, margin: 5, borderRadius: 5, textAlign: 'center' }}>Mas a Estrenar</Text>
+        </TouchableOpacity>
       </View>
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Past Events</Text>
+        <Text style={styles.sectionTitle}>Estrenos</Text>
         <FlatList
           data={dataPastEvent}
           keyExtractor={(item) => item.id}
           horizontal={true} // Configura la lista como horizontal
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
-            <View style={{ padding: 10 }}>
+            <View style={{ padding: 5 }}>
               <TouchableOpacity
-                onPress={() => handleImagePress(item.idMovie)}
-                style={{ padding: 10 }}
+                onPress={() => handleImagePress(item.idMovie, item.titulo, item.descripcion, item.imagen)}
+                style={{ padding: 5 }}
               >
                 <Image
                   style={styles.img}
-                  source={{ uri: item.imagen }}
+                  source={{ uri: item.banner }}
                 />
               </TouchableOpacity>
             </View>
           )}
         />
-        <Button title="More Past Events" color={"black"} onPress={() => navigation.navigate('Past Events')}></Button>
+        <TouchableOpacity style={{ borderColor: 'black', borderWidth: 1, borderRadius: 10, margin: 5 }} onPress={() => navigation.navigate('Estrenos')}>
+          <Text style={{ fontSize: 16, margin: 5, borderRadius: 5, textAlign: 'center' }}>Mas Estrenos</Text>
+        </TouchableOpacity>
       </View>
     </View>
 
@@ -136,19 +145,26 @@ function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    padding: 5,
+    backgroundColor: '#FFED8D'
   },
   section: {
-    marginBottom: 20,
+    margin: 5,
+    flex: 1,
+    backgroundColor: '#fbd52c',
+    borderRadius: 10,
+    borderColor: 'black',
+    borderWidth: 1,
   },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: 'bold',
-    marginBottom: 10,
+    margin: 5,
+    textAlign: 'center',
   },
   img: {
-    width: 170,
-    height: 170
+    width: 181,
+    height: 271
   }
 });
 

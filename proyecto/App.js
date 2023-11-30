@@ -1,7 +1,8 @@
 import Navigation from './src/components/Navigation';
-const App = () => {
+
+function App () {
   return (
-   <Navigation></Navigation>
+    <Navigation></Navigation>
   );
 }
 

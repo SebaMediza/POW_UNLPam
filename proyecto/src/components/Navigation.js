@@ -7,6 +7,7 @@ import HomeScreen from "../screens/HomeScreen";
 import EventScreen from "../screens/EventScreen";
 import NextEventsScreen from "../screens/NextEventsScreen";
 import PastEventsScreen from "../screens/PastEventsScreen";
+import BananaTV from "../screens/BananaTV";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -22,9 +23,9 @@ const HomeTabNavigator = () => {
                 iconName = focused
                 ? 'ios-home'
                 : 'ios-home-outline';
-            } else if (route.name === 'Next Events') {
+            } else if (route.name === 'Proximamente') {
                 iconName = focused ? 'ios-calendar' : 'ios-calendar-outline';
-            }else if (route.name === 'Past Events') {
+            }else if (route.name === 'Estrenos') {
               iconName = focused ? 'ios-folder' : 'ios-folder-outline';
             }
 
@@ -37,8 +38,8 @@ const HomeTabNavigator = () => {
       })}
     >
         <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Next Events" component={NextEventsScreen} />
-        <Tab.Screen name="Past Events" component={PastEventsScreen} />
+        <Tab.Screen name="Proximamente" component={NextEventsScreen} />
+        <Tab.Screen name="Estrenos" component={PastEventsScreen} />
     </Tab.Navigator>
   );
 };
@@ -59,6 +60,7 @@ function Navigation () {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name="BananaTV" component={BananaTV}></Stack.Screen>
         <Stack.Screen
           name="HomeTabNavigator"
           component={HomeTabNavigator}
