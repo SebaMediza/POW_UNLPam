@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+/*import React, { useEffect, useState } from "react";
 import { View } from 'react-native';
 import Event from "../components/Event";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -9,7 +9,7 @@ function NextEventsScreen({ navigation }) {
 
   const [dataPelis, setDataPelis] = useState([]);
   //const [dataSerie, setDataSerie] = useState([]);
-  const dataEvent = [...dataPelis/*, ...dataSerie*/];
+  const dataEvent = [...dataPelis/*, ...dataSerie];
 
   const fetchAllPelis = async () => {
     const response = await fetch(`${API}/proximamentePelicula`, {
@@ -34,7 +34,7 @@ function NextEventsScreen({ navigation }) {
       const res = await response.json();
       setDataSerie(res);
     };
-  */
+  
   useEffect(() => {
     fetchAllPelis();
     //  fetchAllSerie();
@@ -66,7 +66,7 @@ function NextEventsScreen({ navigation }) {
 };
 
 
-export default NextEventsScreen;
+export default NextEventsScreen;*/
 
 import React, { useState, useEffect } from "react";
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';

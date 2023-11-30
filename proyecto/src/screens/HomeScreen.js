@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+/*import React, { useEffect, useState } from "react";
 import { Button, Text, View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import Event from "../components/Event";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -10,8 +10,8 @@ function HomeScreen({ navigation }) {
   //const [dataNextSerie, setDataNextSerie] = useState([]);
   const [dataPastPelis, setDataPastPelis] = useState([]);
   //const [dataPastSerie, setDataPastSerie] = useState([]);
-  const dataNextEvent = [...dataNextPelis/*, ...dataNextSerie*/];
-  const dataPastEvent = [...dataPastPelis/*, ...dataPastSerie*/];
+  const dataNextEvent = [...dataNextPelis/*, ...dataNextSerie];
+  const dataPastEvent = [...dataPastPelis/*, ...dataPastSerie];
 
 
   const fetchAllNextPelis = async () => {
@@ -36,7 +36,7 @@ function HomeScreen({ navigation }) {
     })
     const res = await response.json();
     setDataNextSerie(res);
-  };*/
+  };
 
   const fetchAllPastPelis = async () => {
     const response = await fetch(`${API}/peliculaPasadas`, {
@@ -60,7 +60,7 @@ function HomeScreen({ navigation }) {
     })
     const res = await response.json();
     setDataPastSerie(res);
-  };*/
+  }; 
 
 
   useEffect(() => {
@@ -142,9 +142,11 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;import React, { useEffect, useState } from "react";
-import { TouchableOpacity, Button, Text, View, StyleSheet, FlatList, Image } from "react-native";
+export default HomeScreen;*/
+import React, { useEffect, useState } from "react";
+import { TouchableOpacity, Button, Text, View, StyleSheet, FlatList, Image, AsyncStorage } from "react-native";
 import { useNavigation } from '@react-navigation/native';
+import { API } from '@env'
 
 const urlApi = 'http://localhost:7071'
 function HomeScreen() {
@@ -160,50 +162,54 @@ function HomeScreen() {
   
 
   const fetchAllNextPelis = async () => {
-    const response = await fetch(urlApi + '/proximamentePelicula', {
+    const response = await fetch(`${API}/proximamentePelicula`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJibGFzIiwiaWF0IjoxNzAwNjc3NjY4fQ.iUrd1YhX5F0BILCPmNaIFteREZndbmSDpAuuoY5af-Y'
+        'x-access-token': await AsyncStorage.getItem('x-access-token'),
       }
     })
     const res = await response.json();
+    console.log(res);
     setDataNextPelis(res);
   };
 
   const fetchAllNextSerie = async () => {
-    const response = await fetch(urlApi + '/proximamenteSerie', {
+    const response = await fetch(`${API}/proximamenteSerie`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJibGFzIiwiaWF0IjoxNzAwNjc3NjY4fQ.iUrd1YhX5F0BILCPmNaIFteREZndbmSDpAuuoY5af-Y'
+        'x-access-token': await AsyncStorage.getItem('x-access-token'),
       }
     })
     const res = await response.json();
+    console.log(res);
     setDataNextSerie(res);
   };
 
   const fetchAllPastPelis = async () => {
-    const response = await fetch(urlApi + '/peliculaPasadas', {
+    const response = await fetch(`${API}/peliculaPasadas`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJibGFzIiwiaWF0IjoxNzAwNjc3NjY4fQ.iUrd1YhX5F0BILCPmNaIFteREZndbmSDpAuuoY5af-Y'
+        'x-access-token': await AsyncStorage.getItem('x-access-token'),
       }
     })
     const res = await response.json();
+    console.log(res);
     setDataPastPelis(res);
   };
 
   const fetchAllPastSerie = async () => {
-    const response = await fetch(urlApi + '/seriePasadas', {
+    const response = await fetch(`${API}/seriePasadas`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJibGFzIiwiaWF0IjoxNzAwNjc3NjY4fQ.iUrd1YhX5F0BILCPmNaIFteREZndbmSDpAuuoY5af-Y'
+        'x-access-token': await AsyncStorage.getItem('x-access-token'),
       }
     })
     const res = await response.json();
+    console.log(res);
     setDataPastSerie(res);
   };
 

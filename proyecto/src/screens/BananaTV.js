@@ -4,12 +4,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { API } from '@env'
 
 const BananaTV = ({ navigation }) => {
-  const [nombre, setNombre] = useState('');
+  const [mail, setMail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = async () => {
     try {
-      const usuario = { nombre, password };
+      const usuario = { mail, password };
       const data = await fetch(`${API}/login`, {
         method: 'POST',
         headers: {
@@ -40,9 +40,9 @@ const BananaTV = ({ navigation }) => {
         <Text style={styles.title}>Iniciar Sesión</Text>
         <TextInput
           style={styles.input}
-          placeholder="Nombre"
-          onChangeText={(text) => setNombre(text)}
-          value={nombre}
+          placeholder="Mail"
+          onChangeText={(text) => setMail(text)}
+          value={mail}
         />
         <TextInput
           style={styles.input}

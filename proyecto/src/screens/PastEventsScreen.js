@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+/*import React, { useEffect, useState } from "react";
 import { View } from 'react-native';
 import Event from "../components/Event";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -7,7 +7,7 @@ import { API } from '@env'
 function PastEventsScreen({ navigation }) {
   const [dataPelis, setDataPelis] = useState([]);
   //const [dataSerie, setDataSerie] = useState([]);
-  const dataEvent = [...dataPelis/*, ...dataSerie*/];
+  const dataEvent = [...dataPelis/*, ...dataSerie];
 
   const fetchAllPelis = async () => {
     const response = await fetch(`${API}/peliculaPasadas`, {
@@ -32,7 +32,7 @@ function PastEventsScreen({ navigation }) {
       const res = await response.json();
       setDataSerie(res);
     };
-  */
+  
   useEffect(() => {
     fetchAllPelis();
     //  fetchAllSerie();
@@ -63,7 +63,8 @@ function PastEventsScreen({ navigation }) {
   );
 };
 
-export default PastEventsScreen;import React, {useState, useEffect} from "react";
+export default PastEventsScreen;*/
+import React, {useState, useEffect} from "react";
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 
 

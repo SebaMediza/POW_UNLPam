@@ -98,7 +98,7 @@ export default EventScreen;
       />
       <Button title="Comentar" onPress={handleComment} />
     </View>
-*/import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TextInput, Button, FlatList, StyleSheet } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 
@@ -185,7 +185,6 @@ function EventScren() {
         style={{ width: '100%', height: 200 }}
       />
       <Text style={{ fontSize: 16, marginTop: 10 }}>{data.descripcion}</Text>
-      {/* Render del video: Puedes agregar un componente de video aquí */}
 
       <Text style={{ fontSize: 18, marginTop: 20, marginBottom: 10 }}>Comentarios</Text>
 
@@ -229,4 +228,4 @@ const styles = StyleSheet.create({
     fontSize: 16
   }
 });
-export default EventScren;
+export default EventScren;*/
