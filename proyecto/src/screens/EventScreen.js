@@ -14,6 +14,7 @@ function EventScren() {
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
   const [hayComentarios, setHayComentarios] = useState(false)
+  const [data, setData] = useState([]);
 
   const handleComment = () => {
     const idContenido = idMovie;
@@ -59,7 +60,7 @@ function EventScren() {
     setComments(res);
   };
 
-  const fetchPeli = async () => {
+  const fetchPeli = async (idMovie) => {
     const response = await fetch(`${API}/peliculas/${idMovie}`, {
       method: 'GET',
       headers: {
@@ -73,6 +74,7 @@ function EventScren() {
 
   useEffect(() => {
     verComentarios(idMovie);
+    fetchPeli(idMovie);
   }, []);
 
   return (
