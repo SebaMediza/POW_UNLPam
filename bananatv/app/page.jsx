@@ -64,16 +64,16 @@ const page = () => {
       <div className="form-container sign-up">
         <form onSubmit={handleRegister}>
           <input
-            type="email"
-            placeholder="Email"
-            onChange={(e) => setMail(e.target.value)}
-            value={mail} />
-          <input
             className='formInput'
             type="text"
             placeholder="Name"
             onChange={(e) => setNombre(e.target.value)}
             value={nombre} />
+          <input
+            type="email"
+            placeholder="Email"
+            onChange={(e) => setMail(e.target.value)}
+            value={mail} />
           <input
             type="password"
             placeholder="Password"
