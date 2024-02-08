@@ -4,6 +4,7 @@ import Card from "@/components/Card"
 
 import '@/public/assets/css/Card.css'
 import '@/public/assets/css/BarraBusqueda.css'
+import '@/public/assets/css/ContenidoMovie.css'
 
 const page = () => {
     const api = 'http://localhost:7071/peliculas'
@@ -85,7 +86,9 @@ const page = () => {
                         </div>
                     </div>
                     <br />
-                    <Card producciones={data} deletePeli={deletePeli} editPeli={editPeli}/>
+                    <div className="contenido">
+                        <Card producciones={data} deletePeli={deletePeli} editPeli={editPeli} />
+                    </div>
                 </div>
             )}
         </>
